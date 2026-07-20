@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupWordDetailCarousel();
   setupStoryTabs();
   setupTypeQuiz();
+  setupNavOverlay();
 
 });
 
@@ -81,9 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
 --------------------------------------------------------- */
 function setActiveNavLink() {
   const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.navbar__list a[data-nav]').forEach(link => {
-    const isCurrent = link.getAttribute('href').split('?')[0] === path;
-    link.classList.toggle('is-current', isCurrent);
+  document.querySelectorAll('[data-nav]').forEach(link => {
+    const href = (link.getAttribute('href') || '').split('?')[0];
+    link.classList.toggle('is-current', href === path);
   });
 }
 
@@ -109,6 +110,36 @@ function setupScrollReveal() {
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
   targets.forEach(el => io.observe(el));
+}
+
+/* ---------------------------------------------------------
+   共通：検索アイコンから開くオーバーレイメニュー
+--------------------------------------------------------- */
+function setupNavOverlay() {
+  const overlay = document.getElementById('navOverlay');
+  const openBtn = document.querySelector('.navbar__search');
+  const closeBtn = document.getElementById('navOverlayClose');
+  if (!overlay || !openBtn) return;
+
+  function openMenu() {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('menu-open');
+  }
+
+  function closeMenu() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('menu-open');
+  }
+
+  openBtn.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  overlay.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeMenu();
+  });
 }
 
 /* ---------------------------------------------------------
