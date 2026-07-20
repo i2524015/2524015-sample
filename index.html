@@ -1,463 +1,224 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Class3</title>
+    <title>madamisu</title>
 
     <link rel="stylesheet" type="text/css" href="menu.css" />
+    <!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一度きりの推理体験を。| マーダーミステリー</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== HEADER / HERO ===== -->
+<header class="hero" id="top">
+  <div class="hero__bg"></div>
+  <div class="hero__overlay"></div>
+  <nav class="navbar">
+    <ul class="navbar__list">
+      <li><a href="#game">GAME</a></li>
+      <li><a href="#type">TYPE</a></li>
+      <li><a href="#story">STORY</a></li>
+      <li><a href="#words">WORDS</a></li>
+    </ul>
+    <button class="navbar__search" aria-label="検索">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<!-- ===== INTRO ===== -->
+<section class="intro">
+  <div class="intro__stripe"></div>
+  <div class="intro__body">
+    <h2 class="intro__title">マーダーミステリーとは</h2>
+    <p class="intro__text">
+      マーダーミステリーは、参加者一人ひとりが物語の登場人物となり、事件の真相を解き明かしていく体験型の推理ゲームです。
+    </p>
+  </div>
+</section>
+
+<!-- ===== KEYWORD PILLS ===== -->
+<section class="pills">
+  <span class="pill">推理</span>
+  <span class="pill">対話</span>
+  <span class="pill">物語の没入</span>
+</section>
+
+<!-- ===== GAME FLOW / GAME SECTION ===== -->
+<section class="game" id="game">
+  <div class="game__flow">
+    <h3 class="game__flow-title">ゲームの流れ</h3>
+    <ol class="flow-list">
+      <li>キャラ配布</li>
+      <li>情報整理</li>
+      <li>議論フェイズ</li>
+      <li>投票フェイズ</li>
+      <li>エンディング</li>
+      <li>感想戦</li>
+    </ol>
+  </div>
+
+  <div class="section-marker section-marker--game">
+    <div class="section-marker__triangle"></div>
+    <span class="section-marker__number">01</span>
+    <span class="section-marker__label">GAME</span>
+    <span class="section-marker__sublabel">ゲーム</span>
+  </div>
+</section>
+
+<!-- ===== WORDS SECTION ===== -->
+<section class="words" id="words">
+  <div class="section-heading">
+    <span class="section-heading__main">WORDS</span>
+    <span class="section-heading__sub">用語解説</span>
+    <span class="section-heading__number">02</span>
+  </div>
+
+  <div class="term-grid" id="termGrid">
+    <button class="term-card" data-term="alibi">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">アリバイ</span>
+    </button>
+    <button class="term-card" data-term="ending">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">エンディング<br>フェイズ</span>
+    </button>
+    <button class="term-card" data-term="character-sheet">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">キャラクター<br>シート</span>
+    </button>
+    <button class="term-card" data-term="discussion">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">議論フェイズ</span>
+    </button>
+    <button class="term-card" data-term="public-info">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">公開情報</span>
+    </button>
+    <button class="term-card" data-term="private-info">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">個別情報</span>
+    </button>
+
+    <!-- 追加で「もっと見る」に隠れているカード -->
+    <button class="term-card is-hidden" data-term="gm">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">GM<br>(ゲームマスター)</span>
+    </button>
+    <button class="term-card is-hidden" data-term="handout">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">ハンドアウト</span>
+    </button>
+    <button class="term-card is-hidden" data-term="voting">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">投票フェイズ</span>
+    </button>
+  </div>
+
+  <button class="btn-more" id="btnMore">もっと見る</button>
+</section>
+
+<!-- ===== STORY SECTION ===== -->
+<section class="story" id="story">
+  <div class="section-heading">
+    <span class="section-heading__main">STORY</span>
+    <span class="section-heading__sub">キャラ紹介</span>
+    <span class="section-heading__number">03</span>
+  </div>
+
+  <div class="story__panel"></div>
+</section>
+
+<!-- ===== TYPE SECTION ===== -->
+<section class="type" id="type">
+  <div class="section-heading">
+    <span class="section-heading__main">TYPE</span>
+    <span class="section-heading__sub">診断</span>
+    <span class="section-heading__number">04</span>
+  </div>
+
+  <div class="type-grid">
+    <div class="type-card">
+      <span class="type-card__badge"></span>
+      <span class="type-card__label">推理型</span>
+    </div>
+    <div class="type-card">
+      <span class="type-card__badge"></span>
+      <span class="type-card__label">推理型</span>
+    </div>
+    <div class="type-card">
+      <span class="type-card__badge"></span>
+      <span class="type-card__label">推理型</span>
+    </div>
+    <div class="type-card">
+      <span class="type-card__badge"></span>
+      <span class="type-card__label">推理型</span>
+    </div>
+    <div class="type-card">
+      <span class="type-card__badge"></span>
+      <span class="type-card__label">推理型</span>
+    </div>
+    <div class="type-card">
+      <span class="type-card__badge"></span>
+      <span class="type-card__label">推理型</span>
+    </div>
+  </div>
+
+  <button class="btn-primary" id="btnDiagnosis">タイプ診断へ</button>
+</section>
+
+<!-- ===== CASE FILE CAROUSEL ===== -->
+<section class="casefile">
+  <div class="casefile__track" id="casefileTrack">
+    <div class="casefile__slide">
+      <span class="casefile__tag">CASE FILE</span>
+      <div class="casefile__photo"></div>
+      <p class="casefile__caption">容疑者A<br>突然の疑いをかけられ…</p>
+    </div>
+    <div class="casefile__slide is-active">
+      <span class="casefile__tag">CASE FILE</span>
+      <div class="casefile__photo"></div>
+      <p class="casefile__caption">容疑者B<br>突然の疑いをかけられ…</p>
+    </div>
+    <div class="casefile__slide">
+      <span class="casefile__tag">CASE FILE</span>
+      <div class="casefile__photo"></div>
+      <p class="casefile__caption">容疑者C<br>突然の疑いをかけられ…</p>
+    </div>
+  </div>
+  <button class="casefile__arrow casefile__arrow--prev" id="casePrev" aria-label="前へ">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+  </button>
+  <button class="casefile__arrow casefile__arrow--next" id="caseNext" aria-label="次へ">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </button>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <a href="#top" class="footer__back">Back to page top</a>
+  <p class="footer__tagline">一度きりの推理体験を。</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
   </head>
+
   <body>
-// マーダーミステリーとは
-color: black;
- font-size: 15px;
- font-family: Noto Sans JP;
- font-weight: 700;
- line-height: 27px;
- word-wrap: break-word
----
-// 推理
-color: var(--Backgrounds-Primary, white);
- font-size: 14px;
- font-family: Noto Sans JP;
- font-weight: 700;
- line-height: 25.20px;
- word-wrap: break-word
----
-// 対話
-color: var(--Backgrounds-Primary, white);
- font-size: 14px;
- font-family: Noto Sans JP;
- font-weight: 700;
- line-height: 25.20px;
- word-wrap: break-word
----
-// 物語の没入
-color: var(--Backgrounds-Primary, white);
- font-size: 14px;
- font-family: Noto Sans JP;
- font-weight: 700;
- line-height: 25.20px;
- word-wrap: break-word
----
-// ゲームの流れ
-color: var(--Backgrounds-Primary, white);
- font-size: 24px;
- font-family: Inter;
- font-weight: 700;
- word-wrap: break-word
----
-// 推理型
-color: black;
- font-size: 24px;
- font-family: Inter;
- font-weight: 600;
- word-wrap: break-word
----
-// 推理型
-color: black;
- font-size: 24px;
- font-family: Inter;
- font-weight: 600;
- word-wrap: break-word
----
-// 推理型
-color: black;
- font-size: 24px;
- font-family: Inter;
- font-weight: 600;
- word-wrap: break-word
----
-// 推理型
-color: black;
- font-size: 24px;
- font-family: Inter;
- font-weight: 600;
- word-wrap: break-word
----
-// 推理型
-color: black;
- font-size: 24px;
- font-family: Inter;
- font-weight: 600;
- word-wrap: break-word
----
-// 推理型
-color: black;
- font-size: 24px;
- font-family: Inter;
- font-weight: 600;
- word-wrap: break-word
----
-// もっと見る
-color: var(--Backgrounds-Primary, white);
- font-size: 15px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// ：情報を隠しすぎた。
-color: black;
- font-size: 10px;
- font-family: Noto Sans JP;
- font-weight: 500;
- line-height: 18px;
- word-wrap: break-word
----
-// CASE FILE
-color: black;
- font-size: 12px;
- font-family: Noto Sans JP;
- font-weight: 500;
- line-height: 21.60px;
- word-wrap: break-word
----
-// 男性A
-color: black;
- font-size: 12px;
- font-family: Noto Sans JP;
- font-weight: 500;
- line-height: 21.60px;
- word-wrap: break-word
----
-// ：情報を隠しすぎた。
-color: black;
- font-size: 10px;
- font-family: Noto Sans JP;
- font-weight: 500;
- line-height: 18px;
- word-wrap: break-word
----
-// CASE FILE
-color: black;
- font-size: 12px;
- font-family: Noto Sans JP;
- font-weight: 500;
- line-height: 21.60px;
- word-wrap: break-word
----
-// 男性A
-color: black;
- font-size: 12px;
- font-family: Noto Sans JP;
- font-weight: 500;
- line-height: 21.60px;
- word-wrap: break-word
----
-// ：情報を隠しすぎた。
-color: black;
- font-size: 10px;
- font-family: Noto Sans JP;
- font-weight: 500;
- line-height: 18px;
- word-wrap: break-word
----
-// CASE FILE
-color: black;
- font-size: 12px;
- font-family: Noto Sans JP;
- font-weight: 500;
- line-height: 21.60px;
- word-wrap: break-word
----
-// 男性A
-color: black;
- font-size: 12px;
- font-family: Noto Sans JP;
- font-weight: 500;
- line-height: 21.60px;
- word-wrap: break-word
----
-// Back to page top
-color: black;
- font-size: 15px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// 一度きりの推理体験を。
-color: black;
- font-size: 24px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// タイプ診断へ
-color: var(--Backgrounds-Primary, white);
- font-size: 24px;
- font-family: Inter;
- font-weight: 600;
- word-wrap: break-word
----
-// GAME
-color: white;
- font-size: 12px;
- font-family: Inter;
- font-weight: 400;
- word-wrap: break-word
----
-// TYPE
-color: white;
- font-size: 12px;
- font-family: Inter;
- font-weight: 400;
- word-wrap: break-word
----
-// STORY
-color: white;
- font-size: 12px;
- font-family: Inter;
- font-weight: 400;
- word-wrap: break-word
----
-// WORDS
-color: white;
- font-size: 12px;
- font-family: Inter;
- font-weight: 400;
- word-wrap: break-word
----
-// マーダーミステリーとは
-color: white;
- font-size: 12px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// マーダーミステリーは、参加者一人ひとりが物語の登場人物となり、事件の真相を解き明かしていく体験型の推理ゲームです。
-color: white;
- font-size: 12px;
- font-family: Inter;
- font-weight: 300;
- word-wrap: break-word
----
-// キャラ配布
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// ↡
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// ↡
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// ↡
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// ↡
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// ↡
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// 情報整理
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// 議論フェイズ
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// 投票フェイズ
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// エンディング
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// 感想戦
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 500;
- word-wrap: break-word
----
-// GAME
-color: #ECC100;
- font-size: 32px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// ０
-color: #ECC100;
- font-size: 48px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// １
-color: #ECC100;
- font-size: 48px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// ゲーム
-color: #ECC100;
- font-size: 15px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// WORDS
-color: #ECC100;
- font-size: 26px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// 0
-color: #ECC100;
- font-size: 40px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// 2
-color: #ECC100;
- font-size: 40px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// 用語解説
-color: #ECC100;
- font-size: 13px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// STORY
-color: #ECC100;
- font-size: 32px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// キャラ紹介
-color: #ECC100;
- font-size: 15px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// ０
-color: #ECC100;
- font-size: 48px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// ３
-color: #ECC100;
- font-size: 48px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// TYPE
-color: #ECC100;
- font-size: 36px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// 診断
-color: #ECC100;
- font-size: 15px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// ０
-color: #ECC100;
- font-size: 40px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// ４
-color: #ECC100;
- font-size: 40px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// アリバイ
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// エンディングフェイズ
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// キャラクターシート
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// 議論フェイズ
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// 公開情報
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
----
-// 個別情報
-color: white;
- font-size: 16px;
- font-family: Inter;
- font-weight: 800;
- word-wrap: break-word
+
   </body>
 </html>
