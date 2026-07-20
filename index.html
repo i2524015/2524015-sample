@@ -1,10 +1,4 @@
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>madamisu</title>
-
-    <link rel="stylesheet" type="text/css" href="menu.css" />
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -20,10 +14,10 @@
   <div class="hero__overlay"></div>
   <nav class="navbar">
     <ul class="navbar__list">
-      <li><a href="#game">GAME</a></li>
-      <li><a href="#type">TYPE</a></li>
-      <li><a href="#story">STORY</a></li>
-      <li><a href="#words">WORDS</a></li>
+      <li><a href="game.html" data-nav="game">GAME</a></li>
+      <li><a href="type.html" data-nav="type">TYPE</a></li>
+      <li><a href="story.html" data-nav="story">STORY</a></li>
+      <li><a href="words.html" data-nav="words">WORDS</a></li>
     </ul>
     <button class="navbar__search" aria-label="検索">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
@@ -37,7 +31,7 @@
 <!-- ===== INTRO ===== -->
 <section class="intro">
   <div class="intro__stripe"></div>
-  <div class="intro__body">
+  <div class="intro__body reveal">
     <h2 class="intro__title">マーダーミステリーとは</h2>
     <p class="intro__text">
       マーダーミステリーは、参加者一人ひとりが物語の登場人物となり、事件の真相を解き明かしていく体験型の推理ゲームです。
@@ -54,7 +48,7 @@
 
 <!-- ===== GAME FLOW / GAME SECTION ===== -->
 <section class="game" id="game">
-  <div class="game__flow">
+  <div class="game__flow reveal">
     <h3 class="game__flow-title">ゲームの流れ</h3>
     <ol class="flow-list">
       <li>キャラ配布</li>
@@ -66,61 +60,61 @@
     </ol>
   </div>
 
-  <div class="section-marker section-marker--game">
+  <a class="section-marker section-marker--game" href="game.html">
     <div class="section-marker__triangle"></div>
     <span class="section-marker__number">01</span>
     <span class="section-marker__label">GAME</span>
     <span class="section-marker__sublabel">ゲーム</span>
-  </div>
+  </a>
 </section>
 
 <!-- ===== WORDS SECTION ===== -->
 <section class="words" id="words">
-  <div class="section-heading">
+  <div class="section-heading reveal">
     <span class="section-heading__main">WORDS</span>
     <span class="section-heading__sub">用語解説</span>
     <span class="section-heading__number">02</span>
   </div>
 
-  <div class="term-grid" id="termGrid">
-    <button class="term-card" data-term="alibi">
+  <div class="term-grid reveal" id="termGrid">
+    <a class="term-card" href="words.html?term=alibi">
       <span class="term-card__corner"></span>
       <span class="term-card__label">アリバイ</span>
-    </button>
-    <button class="term-card" data-term="ending">
+    </a>
+    <a class="term-card" href="words.html?term=ending">
       <span class="term-card__corner"></span>
       <span class="term-card__label">エンディング<br>フェイズ</span>
-    </button>
-    <button class="term-card" data-term="character-sheet">
+    </a>
+    <a class="term-card" href="words.html?term=character-sheet">
       <span class="term-card__corner"></span>
       <span class="term-card__label">キャラクター<br>シート</span>
-    </button>
-    <button class="term-card" data-term="discussion">
+    </a>
+    <a class="term-card" href="words.html?term=discussion">
       <span class="term-card__corner"></span>
       <span class="term-card__label">議論フェイズ</span>
-    </button>
-    <button class="term-card" data-term="public-info">
+    </a>
+    <a class="term-card" href="words.html?term=public-info">
       <span class="term-card__corner"></span>
       <span class="term-card__label">公開情報</span>
-    </button>
-    <button class="term-card" data-term="private-info">
+    </a>
+    <a class="term-card" href="words.html?term=private-info">
       <span class="term-card__corner"></span>
       <span class="term-card__label">個別情報</span>
-    </button>
+    </a>
 
     <!-- 追加で「もっと見る」に隠れているカード -->
-    <button class="term-card is-hidden" data-term="gm">
+    <a class="term-card is-hidden" href="words.html?term=gm">
       <span class="term-card__corner"></span>
       <span class="term-card__label">GM<br>(ゲームマスター)</span>
-    </button>
-    <button class="term-card is-hidden" data-term="handout">
+    </a>
+    <a class="term-card is-hidden" href="words.html?term=handout">
       <span class="term-card__corner"></span>
       <span class="term-card__label">ハンドアウト</span>
-    </button>
-    <button class="term-card is-hidden" data-term="voting">
+    </a>
+    <a class="term-card is-hidden" href="words.html?term=voting">
       <span class="term-card__corner"></span>
       <span class="term-card__label">投票フェイズ</span>
-    </button>
+    </a>
   </div>
 
   <button class="btn-more" id="btnMore">もっと見る</button>
@@ -128,24 +122,24 @@
 
 <!-- ===== STORY SECTION ===== -->
 <section class="story" id="story">
-  <div class="section-heading">
+  <div class="section-heading reveal">
     <span class="section-heading__main">STORY</span>
     <span class="section-heading__sub">キャラ紹介</span>
     <span class="section-heading__number">03</span>
   </div>
 
-  <div class="story__panel"></div>
+  <a class="story__panel reveal" href="story.html" aria-label="ストーリーを見る"></a>
 </section>
 
 <!-- ===== TYPE SECTION ===== -->
 <section class="type" id="type">
-  <div class="section-heading">
+  <div class="section-heading reveal">
     <span class="section-heading__main">TYPE</span>
     <span class="section-heading__sub">診断</span>
     <span class="section-heading__number">04</span>
   </div>
 
-  <div class="type-grid">
+  <div class="type-grid reveal">
     <div class="type-card">
       <span class="type-card__badge"></span>
       <span class="type-card__label">推理型</span>
@@ -172,7 +166,7 @@
     </div>
   </div>
 
-  <button class="btn-primary" id="btnDiagnosis">タイプ診断へ</button>
+  <a class="btn-primary" id="btnDiagnosis" href="type.html">タイプ診断へ</a>
 </section>
 
 <!-- ===== CASE FILE CAROUSEL ===== -->
@@ -214,11 +208,4 @@
 
 <script src="script.js"></script>
 </body>
-</html>
-
-  </head>
-
-  <body>
-
-  </body>
 </html>
