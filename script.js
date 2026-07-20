@@ -1,61 +1,124 @@
 // =========================================================
 // マーダーミステリー体験サイト — script.js
+// 全ページ共通。要素が存在しないページでは各処理は自動でスキップされます。
 // =========================================================
- 
+
+/* ---------------------------------------------------------
+   用語データ（index.html の用語カード / words.html の詳細ページで共用）
+--------------------------------------------------------- */
+const TERMS = [
+  {
+    id: 'alibi',
+    label: 'アリバイ',
+    title: 'アリバイ',
+    desc: '事件が起きた時間に、どこで何をしていたかを示す証言。'
+  },
+  {
+    id: 'ending',
+    label: 'エンディングフェイズ',
+    title: 'エンディングフェイズ',
+    desc: '投票結果と事件の真相が公開され、各キャラクターの秘密や目的が明かされる最終フェイズ。'
+  },
+  {
+    id: 'character-sheet',
+    label: 'キャラクターシート',
+    title: 'キャラクターシート',
+    desc: 'プレイヤーごとに配られる、演じる人物の設定・目的・秘密がまとめられた資料。'
+  },
+  {
+    id: 'discussion',
+    label: '議論フェイズ',
+    title: '議論フェイズ',
+    desc: '参加者同士で情報を交換し、質問や証言をもとに事件の真相を推理する時間。'
+  },
+  {
+    id: 'public-info',
+    label: '公開情報',
+    title: '公開情報',
+    desc: '全プレイヤーが共通して知っている、誰に話しても構わない情報。'
+  },
+  {
+    id: 'private-info',
+    label: '個別情報',
+    title: '個別情報',
+    desc: '特定のキャラクターだけが知っている情報。話すか隠すかで展開が変わる。'
+  },
+  {
+    id: 'gm',
+    label: 'GM（ゲームマスター）',
+    title: 'GM（ゲームマスター）',
+    desc: '進行役としてゲーム全体を管理し、ルール説明や進行のサポートを行う人。'
+  },
+  {
+    id: 'handout',
+    label: 'ハンドアウト',
+    title: 'ハンドアウト',
+    desc: 'キャラクターシートの一部として渡される、個別の設定資料や証拠品。'
+  },
+  {
+    id: 'voting',
+    label: '投票フェイズ',
+    title: '投票フェイズ',
+    desc: '議論で集めた情報をもとに、犯人だと思う人物へ投票するフェイズ。一票が結末を左右する。'
+  }
+];
+
 document.addEventListener('DOMContentLoaded', () => {
- 
-  /* ---- 「もっと見る」で用語カードを追加表示 ---- */
-  const btnMore = document.getElementById('btnMore');
-  const hiddenCards = document.querySelectorAll('.term-card.is-hidden');
- 
-  if (btnMore) {
-    btnMore.addEventListener('click', () => {
-      hiddenCards.forEach(card => card.classList.remove('is-hidden'));
-      btnMore.classList.add('is-done');
-    });
+
+  setActiveNavLink();
+  setupScrollReveal();
+  setupSmoothAnchors();
+  setupMoreTerms();
+  setupCaseFileCarousel();
+  setupWordDetailCarousel();
+  setupStoryTabs();
+  setupTypeQuiz();
+
+});
+
+/* ---------------------------------------------------------
+   共通ナビ：現在ページのタブをハイライト
+--------------------------------------------------------- */
+function setActiveNavLink() {
+  const path = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.navbar__list a[data-nav]').forEach(link => {
+    const isCurrent = link.getAttribute('href').split('?')[0] === path;
+    link.classList.toggle('is-current', isCurrent);
+  });
+}
+
+/* ---------------------------------------------------------
+   共通：スクロールで要素をふわっと表示（.reveal クラス）
+--------------------------------------------------------- */
+function setupScrollReveal() {
+  const targets = document.querySelectorAll('.reveal');
+  if (!targets.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach(el => el.classList.add('is-visible'));
+    return;
   }
- 
-  /* ---- タイプ診断ボタン（仮のアラート／将来的にページ遷移に差し替え可） ---- */
-  const btnDiagnosis = document.getElementById('btnDiagnosis');
-  if (btnDiagnosis) {
-    btnDiagnosis.addEventListener('click', () => {
-      alert('タイプ診断ページは準備中です。近日公開！');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
     });
-  }
- 
-  /* ---- CASE FILE カルーセル ---- */
-  const track = document.getElementById('casefileTrack');
-  const slides = track ? Array.from(track.children) : [];
-  const prevBtn = document.getElementById('casePrev');
-  const nextBtn = document.getElementById('caseNext');
-  let current = slides.findIndex(s => s.classList.contains('is-active'));
-  if (current < 0) current = 0;
- 
-  function renderSlide() {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('is-active', i === current);
-    });
-    track.style.transform = `translateX(-${current * 100}%)`;
-  }
- 
-  if (track && slides.length) {
-    renderSlide();
- 
-    nextBtn?.addEventListener('click', () => {
-      current = (current + 1) % slides.length;
-      renderSlide();
-    });
- 
-    prevBtn?.addEventListener('click', () => {
-      current = (current - 1 + slides.length) % slides.length;
-      renderSlide();
-    });
-  }
- 
-  /* ---- ナビゲーションのスムーススクロール（フォールバック） ---- */
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  targets.forEach(el => io.observe(el));
+}
+
+/* ---------------------------------------------------------
+   共通：ページ内アンカー（#top など）のスムーススクロール
+--------------------------------------------------------- */
+function setupSmoothAnchors() {
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href').slice(1);
+      if (!targetId) return;
       const target = document.getElementById(targetId);
       if (target) {
         e.preventDefault();
@@ -63,5 +126,201 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
- 
-});
+}
+
+/* ---------------------------------------------------------
+   index.html: WORDS「もっと見る」
+--------------------------------------------------------- */
+function setupMoreTerms() {
+  const btnMore = document.getElementById('btnMore');
+  if (!btnMore) return;
+  const hiddenCards = document.querySelectorAll('.term-card.is-hidden');
+
+  btnMore.addEventListener('click', () => {
+    hiddenCards.forEach((card, i) => {
+      setTimeout(() => card.classList.remove('is-hidden'), i * 70);
+    });
+    btnMore.classList.add('is-done');
+  });
+}
+
+/* ---------------------------------------------------------
+   index.html: CASE FILE カルーセル
+--------------------------------------------------------- */
+function setupCaseFileCarousel() {
+  const track = document.getElementById('casefileTrack');
+  if (!track) return;
+  const slides = Array.from(track.children);
+  const prevBtn = document.getElementById('casePrev');
+  const nextBtn = document.getElementById('caseNext');
+  let current = slides.findIndex(s => s.classList.contains('is-active'));
+  if (current < 0) current = 0;
+
+  function render() {
+    slides.forEach((slide, i) => slide.classList.toggle('is-active', i === current));
+    track.style.transform = `translateX(-${current * 100}%)`;
+  }
+
+  render();
+  nextBtn?.addEventListener('click', () => { current = (current + 1) % slides.length; render(); });
+  prevBtn?.addEventListener('click', () => { current = (current - 1 + slides.length) % slides.length; render(); });
+}
+
+/* ---------------------------------------------------------
+   words.html: 用語詳細カルーセル（左右プレビュー付き）
+--------------------------------------------------------- */
+function setupWordDetailCarousel() {
+  const stage = document.getElementById('wordStage');
+  if (!stage) return;
+
+  const titleEl = document.getElementById('wordTitle');
+  const descEl = document.getElementById('wordDesc');
+  const peekPrevEl = document.getElementById('wordPeekPrev');
+  const peekNextEl = document.getElementById('wordPeekNext');
+  const prevBtn = document.getElementById('wordPrev');
+  const nextBtn = document.getElementById('wordNext');
+  const counterEl = document.getElementById('wordCounter');
+
+  const params = new URLSearchParams(location.search);
+  const requested = params.get('term');
+  let index = TERMS.findIndex(t => t.id === requested);
+  if (index < 0) index = 0;
+
+  function render(direction) {
+    const term = TERMS[index];
+    const prevTerm = TERMS[(index - 1 + TERMS.length) % TERMS.length];
+    const nextTerm = TERMS[(index + 1) % TERMS.length];
+
+    const activeCard = document.getElementById('wordCurrent');
+    activeCard.classList.remove('is-anim-left', 'is-anim-right');
+    void activeCard.offsetWidth; // reflow でアニメーションを再トリガー
+    if (direction === 'next') activeCard.classList.add('is-anim-right');
+    if (direction === 'prev') activeCard.classList.add('is-anim-left');
+
+    titleEl.textContent = term.title;
+    descEl.textContent = term.desc;
+    peekPrevEl.textContent = prevTerm.label;
+    peekNextEl.textContent = nextTerm.label;
+    if (counterEl) counterEl.textContent = `${index + 1} / ${TERMS.length}`;
+
+    const newUrl = `${location.pathname}?term=${term.id}`;
+    history.replaceState(null, '', newUrl);
+  }
+
+  render();
+
+  nextBtn?.addEventListener('click', () => { index = (index + 1) % TERMS.length; render('next'); });
+  prevBtn?.addEventListener('click', () => { index = (index - 1 + TERMS.length) % TERMS.length; render('prev'); });
+  peekNextEl?.addEventListener('click', () => { index = (index + 1) % TERMS.length; render('next'); });
+  peekPrevEl?.addEventListener('click', () => { index = (index - 1 + TERMS.length) % TERMS.length; render('prev'); });
+
+  // スワイプ操作（タッチ）にも対応
+  let touchStartX = null;
+  stage.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) {
+      if (dx < 0) { index = (index + 1) % TERMS.length; render('next'); }
+      else { index = (index - 1 + TERMS.length) % TERMS.length; render('prev'); }
+    }
+    touchStartX = null;
+  });
+}
+
+/* ---------------------------------------------------------
+   story.html: キャラタブ切り替え
+--------------------------------------------------------- */
+function setupStoryTabs() {
+  const tabs = document.querySelectorAll('.story-tab');
+  const image = document.getElementById('storyImage');
+  if (!tabs.length || !image) return;
+
+  const palettes = [
+    'linear-gradient(150deg,#3a4a58,#1c2b38)',
+    'linear-gradient(150deg,#4a3a2f,#1c2b38)',
+    'linear-gradient(150deg,#2f3a4a,#1c2b38)',
+    'linear-gradient(150deg,#4a2f3a,#1c2b38)',
+    'linear-gradient(150deg,#2f4a3f,#1c2b38)'
+  ];
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+
+      const i = Number(tab.dataset.index) || 0;
+      image.classList.add('is-fading');
+      setTimeout(() => {
+        image.style.background = palettes[i % palettes.length];
+        image.classList.remove('is-fading');
+      }, 180);
+    });
+  });
+}
+
+/* ---------------------------------------------------------
+   type.html: マダミスタイプ診断（簡易デモ）
+--------------------------------------------------------- */
+function setupTypeQuiz() {
+  const btnStart = document.getElementById('btnStart');
+  if (!btnStart) return;
+
+  const intro = document.getElementById('quizIntro');
+  const quiz = document.getElementById('quizBody');
+  const result = document.getElementById('quizResult');
+  const questions = Array.from(document.querySelectorAll('.quiz-question'));
+  const resultLabel = document.getElementById('resultLabel');
+  const btnRestart = document.getElementById('btnRestart');
+
+  let qIndex = 0;
+  const scores = {};
+
+  function showQuestion(i) {
+    questions.forEach((q, idx) => q.classList.toggle('is-active', idx === i));
+  }
+
+  btnStart.addEventListener('click', () => {
+    intro.classList.add('is-leaving');
+    setTimeout(() => {
+      intro.classList.add('is-hidden');
+      quiz.classList.remove('is-hidden');
+      requestAnimationFrame(() => quiz.classList.add('is-visible'));
+      showQuestion(0);
+    }, 250);
+  });
+
+  questions.forEach((q) => {
+    q.querySelectorAll('.quiz-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.type;
+        scores[type] = (scores[type] || 0) + 1;
+        qIndex += 1;
+
+        if (qIndex < questions.length) {
+          showQuestion(qIndex);
+        } else {
+          const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+          quiz.classList.remove('is-visible');
+          setTimeout(() => {
+            quiz.classList.add('is-hidden');
+            result.classList.remove('is-hidden');
+            resultLabel.textContent = winner;
+            requestAnimationFrame(() => result.classList.add('is-visible'));
+          }, 250);
+        }
+      });
+    });
+  });
+
+  btnRestart?.addEventListener('click', () => {
+    qIndex = 0;
+    Object.keys(scores).forEach(k => delete scores[k]);
+    result.classList.remove('is-visible');
+    setTimeout(() => {
+      result.classList.add('is-hidden');
+      intro.classList.remove('is-hidden', 'is-leaving');
+      quiz.classList.add('is-hidden');
+    }, 250);
+  });
+}
