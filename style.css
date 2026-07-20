@@ -1191,3 +1191,91 @@ button { font-family: inherit; cursor: pointer; }
   .word-card--peek { flex: 0 0 48px; font-size: 12px; }
   .word-detail__arrow { width: 34px; height: 34px; }
 }
+
+/* =========================================================
+   PC（デスクトップ）レイアウト調整
+   min-width: 1024px を境にレイアウトを最適化
+   ========================================================= */
+@media (min-width: 1024px) {
+
+  /* ---- 共通ヘッダー ---- */
+  .page-header {
+    padding: 28px 5vw 0;
+  }
+  .navbar__list a {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  /* ---- GAME 詳細ページ ---- */
+  .game-detail {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 8px 5vw 100px;
+  }
+
+  .phase { padding-top: 64px; }
+  .phase:first-child { padding-top: 40px; }
+
+  .phase__title { font-size: 24px; }
+  .phase__text { font-size: 15px; max-width: 640px; }
+
+  .character-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+
+  .character-card__name { font-size: 13px; }
+  .character-card__desc { font-size: 10.5px; }
+
+  .quote-row { gap: 20px; }
+  .avatar-circle { width: 84px; height: 84px; }
+  .quote-bubble { font-size: 14px; padding: 16px 20px; max-width: 480px; }
+
+  .photo-masonry {
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 14px;
+  }
+  .photo-masonry__big { grid-row: span 2; }
+  .photo-masonry__col { flex-direction: column; }
+  .photo-masonry__wide { grid-column: 2 / 4; margin-top: 0; aspect-ratio: auto; height: 100%; }
+
+  .voting-diagram svg { max-width: 460px; }
+
+  /* ---- TYPE 診断ページ ---- */
+  .type-detail { min-height: calc(100vh - 300px); padding: 60px 5vw; }
+  .quiz-stage { max-width: 460px; }
+  .type-detail__title { font-size: 24px; }
+  .btn-start { padding: 18px 72px; font-size: 16px; }
+  .quiz-question__text { font-size: 18px; }
+  .quiz-option { padding: 16px 22px; font-size: 15px; }
+  .quiz-result__label { font-size: 40px; }
+
+  /* ---- STORY 詳細ページ ---- */
+  .story-detail { padding-bottom: 64px; }
+  .story-detail__marker { padding: 44px 5vw 64px; }
+  .story-detail__eyebrow { font-size: 36px; }
+  .story-detail__sub { font-size: 13px; }
+
+  .story-detail__stage { padding: 0 5vw; }
+  .story-detail__image { max-width: 480px; aspect-ratio: 16 / 10; }
+
+  .story-detail__tabs {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px 5vw 0;
+    overflow: visible;
+  }
+  .story-tab { height: 52px; }
+
+  /* ---- WORDS 詳細ページ ---- */
+  .word-detail { padding: 56px 0 72px; }
+  .word-detail__stage-wrap { gap: 20px; padding: 0 5vw; }
+  .word-detail__stage { max-width: 640px; gap: 24px; }
+  .word-card--active { min-height: 340px; padding: 48px 44px; }
+  .word-card__title { font-size: 26px; }
+  .word-card__desc { font-size: 15px; max-width: 420px; }
+  .word-card--peek { flex: 0 0 64px; font-size: 13px; min-height: 300px; }
+  .word-detail__arrow { width: 42px; height: 42px; }
+  .word-detail__arrow:hover { background: var(--yellow); color: var(--navy-950); }
+}
