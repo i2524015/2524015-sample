@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TYPE | マダミスタイプ診断 - マーダーミステリー</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="page-header" id="top">
+  <nav class="navbar">
+    <ul class="navbar__list">
+      <li><a href="game.html" data-nav="game">GAME</a></li>
+      <li><a href="type.html" data-nav="type">TYPE</a></li>
+      <li><a href="story.html" data-nav="story">STORY</a></li>
+      <li><a href="words.html" data-nav="words">WORDS</a></li>
+    </ul>
+    <button class="navbar__search" aria-label="検索">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<main class="type-detail">
+  <div class="quiz-stage">
+
+    <!-- STARTボタン -->
+    <div class="quiz-intro" id="quizIntro">
+      <h1 class="type-detail__title">マダミスタイプ診断</h1>
+      <button class="btn-start" id="btnStart">START</button>
+    </div>
+
+    <!-- 簡易診断クイズ -->
+    <div class="quiz-body is-hidden" id="quizBody">
+
+      <div class="quiz-question is-active" data-index="0">
+        <p class="quiz-question__text">事件現場に着いたら、まず何をする？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">現場の証拠を隅々まで観察する</button>
+          <button class="quiz-option" data-type="対話型">近くにいる人にすぐ話しかける</button>
+          <button class="quiz-option" data-type="直感型">なんとなく怪しい人を目で追う</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-index="1">
+        <p class="quiz-question__text">議論フェイズで得意なのは？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">矛盾している証言を突き止めること</button>
+          <button class="quiz-option" data-type="対話型">みんなの意見をまとめること</button>
+          <button class="quiz-option" data-type="直感型">場の空気や表情から嘘を見抜くこと</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-index="2">
+        <p class="quiz-question__text">投票の決め手にするのは？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">集めた情報から筋道立てて絞り込む</button>
+          <button class="quiz-option" data-type="対話型">議論を通して感じた信頼度</button>
+          <button class="quiz-option" data-type="直感型">最初に感じた違和感</button>
+        </div>
+      </div>
+
+      <p class="quiz-progress">質問は全3問です</p>
+    </div>
+
+    <!-- 診断結果 -->
+    <div class="quiz-result is-hidden" id="quizResult">
+      <span class="quiz-result__eyebrow">あなたのタイプは</span>
+      <p class="quiz-result__label" id="resultLabel">推理型</p>
+      <button class="btn-restart" id="btnRestart">もう一度診断する</button>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <a href="#top" class="footer__back">Back to page top</a>
+  <p class="footer__tagline">一度きりの推理体験を。</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
