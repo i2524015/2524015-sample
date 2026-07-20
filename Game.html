@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAME | ゲームの流れ - マーダーミステリー</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="page-header" id="top">
+  <nav class="navbar">
+    <ul class="navbar__list">
+      <li><a href="game.html" data-nav="game">GAME</a></li>
+      <li><a href="type.html" data-nav="type">TYPE</a></li>
+      <li><a href="story.html" data-nav="story">STORY</a></li>
+      <li><a href="words.html" data-nav="words">WORDS</a></li>
+    </ul>
+    <button class="navbar__search" aria-label="検索">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </button>
+  </nav>
+</header>
+
+<main class="game-detail">
+
+  <!-- phase01 -->
+  <section class="phase reveal" id="phase01">
+    <h2 class="phase__title"><span class="phase__num">phase01:</span>キャラ配布</h2>
+    <p class="phase__text">
+      プレイヤーごとに異なるキャラクターシートが配られます。自分の設定や目的、秘密を確認し、役になりきる準備をしましょう。
+    </p>
+    <div class="character-grid">
+      <div class="character-card">
+        <div class="character-card__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></div>
+        <div class="character-card__plate">
+          <span class="character-card__name">クレア</span>
+          <p class="character-card__desc">屋敷に仕える若きメイド。誰よりも館の秘密を知っている。</p>
+        </div>
+      </div>
+      <div class="character-card">
+        <div class="character-card__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></div>
+        <div class="character-card__plate">
+          <span class="character-card__name">エルザ</span>
+          <p class="character-card__desc">当主の娘。莫大な遺産の行方を静かに見つめている。</p>
+        </div>
+      </div>
+      <div class="character-card">
+        <div class="character-card__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></div>
+        <div class="character-card__plate">
+          <span class="character-card__name">レオ</span>
+          <p class="character-card__desc">当主が招いた青年実業家。羽振りの良さには裏がある。</p>
+        </div>
+      </div>
+      <div class="character-card">
+        <div class="character-card__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></div>
+        <div class="character-card__plate">
+          <span class="character-card__name">グレイ</span>
+          <p class="character-card__desc">長年仕える執事。館のすべての鍵を預かる人物。</p>
+        </div>
+      </div>
+      <div class="character-card">
+        <div class="character-card__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></div>
+        <div class="character-card__plate">
+          <span class="character-card__name">ケイン</span>
+          <p class="character-card__desc">当主の主治医。ある晩の出来事を誰にも話していない。</p>
+        </div>
+      </div>
+      <div class="character-card">
+        <div class="character-card__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></div>
+        <div class="character-card__plate">
+          <span class="character-card__name">クロエ</span>
+          <p class="character-card__desc">新聞記者。招待されていないはずなのに、なぜかここにいる。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- phase02 -->
+  <section class="phase reveal" id="phase02">
+    <h2 class="phase__title"><span class="phase__num">phase02:</span>情報整理</h2>
+    <div class="quote-row">
+      <div class="avatar-circle"></div>
+      <p class="quote-bubble">「事件を解くカギは、まず自分の情報を整理することから。」</p>
+    </div>
+    <p class="phase__text">
+      キャラクターシートを読み込み、自分が知っている情報を整理します。議論で何を話し、何を隠すかを考えることがポイントです。
+    </p>
+    <div class="quote-row quote-row--reverse">
+      <div class="avatar-circle"></div>
+    </div>
+  </section>
+
+  <!-- phase03 -->
+  <section class="phase reveal" id="phase03">
+    <h2 class="phase__title"><span class="phase__num">phase03:</span>議論フェイズ</h2>
+    <p class="phase__text">
+      参加者同士で情報を交換しながら事件の真相を推理します。質問をしたり、証言を聞いたりして、犯人を見つけ出しましょう。
+    </p>
+    <div class="photo-masonry">
+      <div class="photo-masonry__big"></div>
+      <div class="photo-masonry__col">
+        <div class="photo-masonry__small"></div>
+        <div class="photo-masonry__small"></div>
+      </div>
+      <div class="photo-masonry__wide"></div>
+    </div>
+  </section>
+
+  <!-- phase04 -->
+  <section class="phase reveal" id="phase04">
+    <h2 class="phase__title"><span class="phase__num">phase04:</span>投票フェイズ</h2>
+    <p class="phase__text">
+      議論で集めた情報をもとに、犯人だと思う人物へ投票します。一票が物語の結末を大きく左右します。
+    </p>
+    <div class="voting-diagram">
+      <svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="votingGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f7e08a"/>
+            <stop offset="0.5" stop-color="#c99a2e"/>
+            <stop offset="1" stop-color="#f7e08a"/>
+          </linearGradient>
+          <marker id="votingArrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#b9c3ca"/>
+          </marker>
+        </defs>
+
+        <!-- arrows -->
+        <line class="voting-arrow" x1="60" y1="80" x2="150" y2="176" marker-end="url(#votingArrowhead)"/>
+        <line class="voting-arrow" x1="170" y1="84" x2="80" y2="176" marker-end="url(#votingArrowhead)"/>
+        <line class="voting-arrow" x1="170" y1="84" x2="260" y2="176" marker-end="url(#votingArrowhead)"/>
+        <line class="voting-arrow" x1="170" y1="84" x2="170" y2="176" marker-end="url(#votingArrowhead)"/>
+        <line class="voting-arrow" x1="280" y1="80" x2="190" y2="176" marker-end="url(#votingArrowhead)"/>
+        <line class="voting-arrow" x1="90" y1="200" x2="250" y2="200" marker-end="url(#votingArrowhead)"/>
+        <line class="voting-arrow" x1="250" y1="204" x2="90" y2="204" marker-end="url(#votingArrowhead)"/>
+
+        <!-- top row -->
+        <g>
+          <circle class="voting-badge" cx="60" cy="56" r="30"/>
+          <path class="voting-badge-icon" transform="translate(46,42) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
+        </g>
+        <g>
+          <circle class="voting-badge" cx="170" cy="56" r="30"/>
+          <path class="voting-badge-icon" transform="translate(156,42) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
+        </g>
+        <g>
+          <circle class="voting-badge" cx="280" cy="56" r="30"/>
+          <path class="voting-badge-icon" transform="translate(266,42) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
+        </g>
+
+        <!-- bottom row -->
+        <g>
+          <circle class="voting-badge" cx="80" cy="206" r="30"/>
+          <path class="voting-badge-icon" transform="translate(66,192) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
+        </g>
+        <g>
+          <circle class="voting-badge" cx="170" cy="206" r="30"/>
+          <path class="voting-badge-icon" transform="translate(156,192) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
+        </g>
+        <g>
+          <circle class="voting-badge" cx="260" cy="206" r="30"/>
+          <path class="voting-badge-icon" transform="translate(246,192) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- phase05 -->
+  <section class="phase reveal" id="phase05">
+    <h2 class="phase__title"><span class="phase__num">phase05:</span>エンディング</h2>
+    <p class="phase__text">
+      投票結果や事件の真相が公開されます。その後、各キャラクターの秘密や目的、行動の理由などが明かされ、物語の結末を楽しみます。投票結果によって結末が変化するシナリオもあります。
+    </p>
+  </section>
+
+  <!-- phase06 -->
+  <section class="phase reveal" id="phase06">
+    <h2 class="phase__title"><span class="phase__num">phase06:</span>感想戦</h2>
+    <p class="phase__text">
+      プレイ後は、お互いの作戦や考えを共有する時間です。ゲーム中には気づけなかった真相や駆け引きを振り返り、最後までマーダーミステリーを楽しみましょう。
+    </p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <a href="#top" class="footer__back">Back to page top</a>
+  <p class="footer__tagline">一度きりの推理体験を。</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
