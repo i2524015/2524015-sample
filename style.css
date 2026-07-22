@@ -84,6 +84,56 @@ button { font-family: inherit; cursor: pointer; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: top 0.25s ease, left 0.25s ease, right 0.25s ease,
+              padding 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ---- スクロール追従（コンパクト）ナビ ---- */
+body.nav-compact .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 150;
+  padding: 8px 12px;
+  background: rgba(15, 25, 34, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+body.nav-compact .navbar__list {
+  padding: 4px;
+}
+
+body.nav-compact .navbar__list a {
+  padding: 6px 8px;
+  font-size: 9.5px;
+}
+
+body.nav-compact .navbar__search {
+  width: 32px;
+  height: 32px;
+}
+
+body.nav-compact .navbar__search svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* page-header はナビが fixed になっても高さが潰れないよう最低高さを確保 */
+.page-header {
+  min-height: 78px;
+}
+
+@media (min-width: 400px) {
+  body.nav-compact .navbar__list a { padding: 7px 10px; font-size: 10.5px; }
+}
+
+@media (min-width: 1024px) {
+  body.nav-compact .navbar { padding: 10px 5vw; }
+  body.nav-compact .navbar__list a { padding: 8px 16px; font-size: 12px; }
+  body.nav-compact .navbar__search { width: 36px; height: 36px; }
 }
 
 .navbar__list {
@@ -295,9 +345,18 @@ button { font-family: inherit; cursor: pointer; }
 --------------------------------------------------------- */
 .section-heading {
   position: relative;
+  display: block;
   padding: 32px 24px 20px;
   background: var(--yellow);
   color: var(--navy-950);
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.section-heading:hover,
+.section-heading:focus-visible {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  outline: none;
 }
 
 .section-heading__main {
@@ -1635,4 +1694,94 @@ body.menu-open {
   font-size: 12px;
   font-weight: 700;
   color: var(--ink-dim);
+}
+
+/* =========================================================
+   HOME：STORY キャラクターセレクター（ZZZ風カルーセル）
+   ========================================================= */
+.story-carousel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 22px 16px 4px;
+}
+
+.story-carousel__track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding: 4px 2px;
+}
+.story-carousel__track::-webkit-scrollbar { display: none; }
+
+.story-carousel__thumb {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  scroll-snap-align: start;
+}
+
+.story-carousel__face {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 38%, #2a3441 0 32%, transparent 33%),
+    conic-gradient(from 200deg, #f7e08a, #c99a2e 25%, #f7e08a 50%, #c99a2e 75%, #f7e08a 100%);
+  background-size: cover;
+  background-position: center;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.story-carousel__name {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ink-dim);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.story-carousel__thumb:hover .story-carousel__face {
+  transform: translateY(-2px);
+}
+
+.story-carousel__thumb.is-active .story-carousel__face {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(244,196,48,0.28);
+}
+
+.story-carousel__thumb.is-active .story-carousel__name {
+  color: var(--yellow);
+}
+
+.story-carousel__arrow {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: var(--navy-700);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.story-carousel__arrow:hover {
+  background: var(--yellow);
+  color: var(--navy-950);
+  transform: scale(1.06);
+}
+
+@media (min-width: 1024px) {
+  .story-carousel { padding: 26px 5vw 4px; gap: 14px; }
+  .story-carousel__face { width: 72px; height: 72px; border-radius: 16px; }
+  .story-carousel__name { font-size: 12px; }
+  .story-carousel__arrow { width: 40px; height: 40px; }
 }
