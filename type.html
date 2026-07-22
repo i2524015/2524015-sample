@@ -11,6 +11,7 @@
 <header class="page-header" id="top">
   <nav class="navbar">
     <ul class="navbar__list">
+      <li><a href="index.html" data-nav="home">HOME</a></li>
       <li><a href="game.html" data-nav="game">GAME</a></li>
       <li><a href="type.html" data-nav="type">TYPE</a></li>
       <li><a href="story.html" data-nav="story">STORY</a></li>
@@ -81,7 +82,70 @@
         </div>
       </div>
 
-      <p class="quiz-progress">質問は全3問です</p>
+      <div class="quiz-question" data-index="3">
+        <p class="quiz-question__text">キャラクターシートを読むとき、最初に確認するのは？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">自分のアリバイと持っている証拠</button>
+          <button class="quiz-option" data-type="対話型">他のキャラクターとの関係性</button>
+          <button class="quiz-option" data-type="直感型">キャラクターの性格や口癖</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-index="4">
+        <p class="quiz-question__text">誰かが嘘をついていると感じたら？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">発言の矛盾点を紙に書き出して整理する</button>
+          <button class="quiz-option" data-type="対話型">本人にやんわりと質問を重ねて確かめる</button>
+          <button class="quiz-option" data-type="直感型">表情や声のトーンの変化を観察する</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-index="5">
+        <p class="quiz-question__text">議論が白熱してきたときのあなたは？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">一歩引いて全体の情報を整理し直す</button>
+          <button class="quiz-option" data-type="対話型">場を落ち着かせて全員の話を聞こうとする</button>
+          <button class="quiz-option" data-type="直感型">誰が一番動揺しているかを見ている</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-index="6">
+        <p class="quiz-question__text">ゲームで一番好きな瞬間は？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">バラバラだった情報が一本の線につながる瞬間</button>
+          <button class="quiz-option" data-type="対話型">誰かと信頼関係を築けたと感じる瞬間</button>
+          <button class="quiz-option" data-type="直感型">「あ、こいつだ」と閃く瞬間</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-index="7">
+        <p class="quiz-question__text">苦手なタイプの参加者は？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">感覚だけで話す、根拠のない主張をする人</button>
+          <button class="quiz-option" data-type="対話型">一人で黙々と考え込んで共有しない人</button>
+          <button class="quiz-option" data-type="直感型">理屈っぽくて話が長い人</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-index="8">
+        <p class="quiz-question__text">エンディングで一番気になるのは？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">自分の推理がどれだけ真相に近かったか</button>
+          <button class="quiz-option" data-type="対話型">他のキャラクターとの関係がどう終わったか</button>
+          <button class="quiz-option" data-type="直感型">最初の勘がどれだけ当たっていたか</button>
+        </div>
+      </div>
+
+      <div class="quiz-question" data-index="9">
+        <p class="quiz-question__text">一言でいうと、あなたの強みは？</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-type="推理型">論理的思考力</button>
+          <button class="quiz-option" data-type="対話型">コミュニケーション力</button>
+          <button class="quiz-option" data-type="直感型">観察力・直感力</button>
+        </div>
+      </div>
+
+      <p class="quiz-progress" id="quizProgress">1 / 10問</p>
     </div>
 
     <!-- 診断結果 -->
