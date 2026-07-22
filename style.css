@@ -88,24 +88,36 @@ button { font-family: inherit; cursor: pointer; }
 
 .navbar__list {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   list-style: none;
   margin: 0;
-  padding: 6px;
+  padding: 5px;
   background: var(--yellow);
   border-radius: 999px;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .navbar__list a {
   display: block;
-  padding: 8px 14px;
-  font-size: 12px;
+  padding: 7px 8px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0;
   color: var(--navy-950);
   border-radius: 999px;
   white-space: nowrap;
   transition: background 0.2s ease;
+}
+
+@media (min-width: 400px) {
+  .navbar__list { gap: 6px; padding: 6px; }
+  .navbar__list a { padding: 8px 11px; font-size: 11px; letter-spacing: 0.01em; }
+}
+
+@media (min-width: 480px) {
+  .navbar__list { gap: 8px; }
+  .navbar__list a { padding: 8px 14px; font-size: 12px; letter-spacing: 0.03em; }
 }
 
 .navbar__list a:hover,
@@ -805,6 +817,13 @@ button { font-family: inherit; cursor: pointer; }
   border-color: transparent var(--navy-800) transparent transparent;
 }
 
+.quote-bubble--flip::before {
+  left: auto;
+  right: -7px;
+  border-width: 7px 0 7px 8px;
+  border-color: transparent transparent transparent var(--navy-800);
+}
+
 /* ---- phase03: 議論フェイズ（写真マソナリー） ---- */
 .photo-masonry {
   display: grid;
@@ -1264,7 +1283,6 @@ button { font-family: inherit; cursor: pointer; }
     max-width: 480px;
     margin: 0 auto;
     padding: 28px 5vw 0;
-    overflow: visible;
   }
   .story-tab { height: 52px; }
 
@@ -1368,4 +1386,150 @@ body.menu-open {
 
 @media (prefers-reduced-motion: reduce) {
   .nav-overlay { transition: none; }
+}
+
+/* =========================================================
+   共通：GAME風の凝ったセクションCTA（WORDS / STORY 末尾）
+   ========================================================= */
+.section-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+  column-gap: 12px;
+  margin: 28px 24px 0;
+  padding: 16px 22px 18px;
+  background: var(--yellow);
+  color: var(--navy-950);
+  clip-path: polygon(7% 0, 100% 0, 100% 100%, 0 100%);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.section-cta:hover,
+.section-cta:focus-visible {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  outline: none;
+}
+
+.section-cta__number {
+  font-size: 28px;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1;
+}
+
+.section-cta__label {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.section-cta__sublabel {
+  flex-basis: 100%;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.78;
+  margin-top: 4px;
+}
+
+/* =========================================================
+   STORYセクション：キャラクタープレビュー（HOME）
+   ========================================================= */
+.story-preview {
+  display: flex;
+  gap: 16px;
+  padding: 22px 24px 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.story-preview::-webkit-scrollbar { display: none; }
+
+.story-preview__card {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 72px;
+  transition: transform 0.2s ease;
+}
+
+.story-preview__card:hover,
+.story-preview__card:focus-visible {
+  transform: translateY(-3px);
+  outline: none;
+}
+
+.story-preview__portrait {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 42%, #2a3441 0 34%, transparent 35%),
+    conic-gradient(from 200deg, #f7e08a, #c99a2e 25%, #f7e08a 50%, #c99a2e 75%, #f7e08a 100%);
+  border: 2px solid #8a6a1f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-preview__portrait svg {
+  width: 50%;
+  height: 50%;
+  fill: #1c2530;
+}
+
+.story-preview__name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .section-cta { margin: 32px 5vw 0; padding: 20px 28px 22px; }
+  .section-cta__number { font-size: 34px; }
+  .section-cta__label { font-size: 20px; }
+  .story-preview { padding: 26px 5vw 4px; gap: 22px; }
+  .story-preview__card { width: 84px; }
+  .story-preview__portrait { width: 76px; height: 76px; }
+  .story-preview__name { font-size: 12.5px; }
+}
+
+/* =========================================================
+   HOME：タイプ診断結果バッジ（type.html の結果を反映）
+   ========================================================= */
+.type-result-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 24px 24px;
+  padding: 16px 20px;
+  background: var(--navy-800);
+  border: 1.5px solid var(--yellow);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.type-result-badge.is-hidden { display: none; }
+
+.type-result-badge__eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+}
+
+.type-result-badge__label {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--yellow);
+}
+
+@media (min-width: 1024px) {
+  .type-result-badge { margin: 4px 5vw 28px; padding: 20px 24px; }
+  .type-result-badge__label { font-size: 26px; }
 }
