@@ -311,6 +311,7 @@ function setupTypeQuiz() {
   const resultLabel = document.getElementById('resultLabel');
   const btnRestart = document.getElementById('btnRestart');
   const progress = document.getElementById('quizProgress');
+  const progressFill = document.getElementById('quizProgressFill');
 
   let qIndex = 0;
   const scores = {};
@@ -318,6 +319,7 @@ function setupTypeQuiz() {
   function showQuestion(i) {
     questions.forEach((q, idx) => q.classList.toggle('is-active', idx === i));
     if (progress) progress.textContent = `${i + 1} / ${questions.length}問`;
+    if (progressFill) progressFill.style.width = `${((i + 1) / questions.length) * 100}%`;
   }
 
   btnStart.addEventListener('click', () => {
