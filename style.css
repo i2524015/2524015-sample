@@ -88,52 +88,30 @@ button { font-family: inherit; cursor: pointer; }
               padding 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* ---- スクロール追従（コンパクト）ナビ ---- */
-body.nav-compact .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 150;
-  padding: 8px 12px;
-  background: rgba(15, 25, 34, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
-}
-
-body.nav-compact .navbar__list {
-  padding: 4px;
-}
-
-body.nav-compact .navbar__list a {
-  padding: 6px 8px;
-  font-size: 9.5px;
-}
-
+/* ---- スクロール追従：虫眼鏡アイコンだけを画面上部に固定表示 ---- */
 body.nav-compact .navbar__search {
-  width: 32px;
-  height: 32px;
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 150;
+  width: 38px;
+  height: 38px;
+  background: rgba(242, 239, 230, 0.95);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 body.nav-compact .navbar__search svg {
-  width: 18px;
-  height: 18px;
-}
-
-/* page-header はナビが fixed になっても高さが潰れないよう最低高さを確保 */
-.page-header {
-  min-height: 78px;
-}
-
-@media (min-width: 400px) {
-  body.nav-compact .navbar__list a { padding: 7px 10px; font-size: 10.5px; }
+  width: 19px;
+  height: 19px;
 }
 
 @media (min-width: 1024px) {
-  body.nav-compact .navbar { padding: 10px 5vw; }
-  body.nav-compact .navbar__list a { padding: 8px 16px; font-size: 12px; }
-  body.nav-compact .navbar__search { width: 36px; height: 36px; }
+  body.nav-compact .navbar__search {
+    top: 18px;
+    right: 5vw;
+    width: 42px;
+    height: 42px;
+  }
 }
 
 .navbar__list {
@@ -187,6 +165,8 @@ body.nav-compact .navbar__search svg {
   background: rgba(242,239,230,0.9);
   color: var(--navy-950);
   flex-shrink: 0;
+  transition: top 0.2s ease, right 0.2s ease, width 0.2s ease, height 0.2s ease,
+              background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .navbar__search:hover { background: var(--paper); }
@@ -311,7 +291,7 @@ body.nav-compact .navbar__search svg {
   position: absolute;
   inset: 0;
   background: var(--yellow);
-  clip-path: polygon(30% 100%, 100% 0, 100% 100%);
+  clip-path: polygon(0 100%, 42% 0, 100% 0, 100% 100%);
 }
 
 .section-marker__number {
@@ -1090,23 +1070,23 @@ body.nav-compact .navbar__search svg {
    ========================================================= */
 .story-detail { background: var(--navy-900); padding-bottom: 40px; }
 
-.story-detail__marker {
+.page-marker {
   position: relative;
   padding: 30px 24px 46px;
   overflow: hidden;
 }
 
-.story-detail__marker::before {
+.page-marker::before {
   content: "";
   position: absolute;
   top: 0; left: 0;
-  width: 62%;
+  width: min(62%, 420px);
   height: 100%;
   background: var(--navy-950);
   clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
-.story-detail__eyebrow {
+.page-marker__eyebrow {
   position: relative;
   display: block;
   font-size: 28px;
@@ -1115,7 +1095,7 @@ body.nav-compact .navbar__search svg {
   line-height: 1;
 }
 
-.story-detail__sub {
+.page-marker__sub {
   position: relative;
   display: block;
   font-size: 12px;
@@ -1217,16 +1197,6 @@ body.nav-compact .navbar__search svg {
   background: var(--navy-900);
   padding: 36px 0 56px;
   overflow: hidden;
-}
-
-.word-detail::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 40%;
-  height: 34%;
-  background: var(--navy-950);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 .word-detail__stage-wrap {
@@ -1396,9 +1366,10 @@ body.nav-compact .navbar__search svg {
 
   /* ---- STORY 詳細ページ ---- */
   .story-detail { padding-bottom: 64px; }
-  .story-detail__marker { padding: 44px 5vw 64px; }
-  .story-detail__eyebrow { font-size: 36px; }
-  .story-detail__sub { font-size: 13px; }
+  .page-marker { padding: 44px 5vw 64px; }
+  .page-marker::before { width: min(62%, 460px); }
+  .page-marker__eyebrow { font-size: 36px; }
+  .page-marker__sub { font-size: 13px; }
 
   .story-detail__stage { padding: 0 5vw; }
   .story-detail__image { max-width: 480px; aspect-ratio: 16 / 10; }
