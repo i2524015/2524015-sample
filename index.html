@@ -14,6 +14,7 @@
   <div class="hero__overlay"></div>
   <nav class="navbar">
     <ul class="navbar__list">
+      <li><a href="index.html" data-nav="home">HOME</a></li>
       <li><a href="game.html" data-nav="game">GAME</a></li>
       <li><a href="type.html" data-nav="type">TYPE</a></li>
       <li><a href="story.html" data-nav="story">STORY</a></li>
@@ -135,6 +136,12 @@
   </div>
 
   <button class="btn-more" id="btnMore">もっと見る</button>
+
+  <a class="section-cta section-cta--words reveal" href="words.html">
+    <span class="section-cta__number">02</span>
+    <span class="section-cta__label">WORDS</span>
+    <span class="section-cta__sublabel">用語集をすべて見る</span>
+  </a>
 </section>
 
 <!-- ===== STORY SECTION ===== -->
@@ -145,7 +152,34 @@
     <span class="section-heading__number">03</span>
   </div>
 
-  <a class="story__panel reveal" href="story.html" aria-label="ストーリーを見る"></a>
+  <div class="story-preview reveal">
+    <a class="story-preview__card" href="story.html">
+      <span class="story-preview__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></span>
+      <span class="story-preview__name">クレア</span>
+    </a>
+    <a class="story-preview__card" href="story.html">
+      <span class="story-preview__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></span>
+      <span class="story-preview__name">エルザ</span>
+    </a>
+    <a class="story-preview__card" href="story.html">
+      <span class="story-preview__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></span>
+      <span class="story-preview__name">レオ</span>
+    </a>
+    <a class="story-preview__card" href="story.html">
+      <span class="story-preview__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></span>
+      <span class="story-preview__name">グレイ</span>
+    </a>
+    <a class="story-preview__card" href="story.html">
+      <span class="story-preview__portrait"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/></svg></span>
+      <span class="story-preview__name">ケイン</span>
+    </a>
+  </div>
+
+  <a class="section-cta section-cta--story reveal" href="story.html">
+    <span class="section-cta__number">03</span>
+    <span class="section-cta__label">STORY</span>
+    <span class="section-cta__sublabel">キャラクターの物語をもっと見る</span>
+  </a>
 </section>
 
 <!-- ===== TYPE SECTION ===== -->
@@ -154,6 +188,11 @@
     <span class="section-heading__main">TYPE</span>
     <span class="section-heading__sub">診断</span>
     <span class="section-heading__number">04</span>
+  </div>
+
+  <div class="type-result-badge is-hidden reveal" id="typeResultBadge">
+    <span class="type-result-badge__eyebrow">あなたの診断結果</span>
+    <span class="type-result-badge__label" id="typeResultLabel">推理型</span>
   </div>
 
   <div class="type-grid reveal">
@@ -183,7 +222,7 @@
     </div>
   </div>
 
-  <a class="btn-primary" id="btnDiagnosis" href="type.html">タイプ診断へ</a>
+  <a class="btn-primary" id="btnDiagnosis" href="type.html"><span id="btnDiagnosisLabel">タイプ診断へ</span></a>
 </section>
 
 <!-- ===== CASE FILE CAROUSEL ===== -->
