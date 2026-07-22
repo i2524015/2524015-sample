@@ -807,7 +807,7 @@ body.nav-compact .navbar__search svg {
     radial-gradient(circle at 50% 42%, #2a3441 0 34%, transparent 35%),
     conic-gradient(from 200deg, #f7e08a, #c99a2e 25%, #f7e08a 50%, #c99a2e 75%, #f7e08a 100%);
   background-size: cover;
-  background-position: center;
+  background-position: center 16%;
   border: 2px solid #8a6a1f;
   display: flex;
   align-items: center;
@@ -1125,7 +1125,9 @@ body.nav-compact .navbar__search svg {
   width: 100%;
   max-width: 340px;
   aspect-ratio: 1 / 1.05;
-  background: #d9d9d9;
+  background-color: #d9d9d9;
+  background-size: cover;
+  background-position: center 4%;
   border-radius: var(--radius);
   transition: opacity 0.18s ease;
 }
@@ -1137,8 +1139,16 @@ body.nav-compact .navbar__search svg {
   padding: 28px 20px 4px;
   overflow-x: auto;
   scrollbar-width: none;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  user-select: none;
 }
 .story-detail__tabs::-webkit-scrollbar { display: none; }
+.story-detail__tabs.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
 
 .story-tab {
   flex: 0 0 auto;
@@ -1162,7 +1172,7 @@ body.nav-compact .navbar__search svg {
     radial-gradient(circle at 50% 42%, #2a3441 0 34%, transparent 35%),
     conic-gradient(from 200deg, #f7e08a, #c99a2e 25%, #f7e08a 50%, #c99a2e 75%, #f7e08a 100%);
   background-size: cover;
-  background-position: center;
+  background-position: center 16%;
   border: 2px solid #8a6a1f;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
@@ -1713,8 +1723,16 @@ body.menu-open {
   scroll-snap-type: x proximity;
   scrollbar-width: none;
   padding: 4px 2px;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  user-select: none;
 }
 .story-carousel__track::-webkit-scrollbar { display: none; }
+.story-carousel__track.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
 
 .story-carousel__thumb {
   flex: 0 0 auto;
@@ -1733,7 +1751,7 @@ body.menu-open {
     radial-gradient(circle at 50% 38%, #2a3441 0 32%, transparent 33%),
     conic-gradient(from 200deg, #f7e08a, #c99a2e 25%, #f7e08a 50%, #c99a2e 75%, #f7e08a 100%);
   background-size: cover;
-  background-position: center;
+  background-position: center 16%;
   border: 2px solid transparent;
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -1784,4 +1802,43 @@ body.menu-open {
   .story-carousel__face { width: 72px; height: 72px; border-radius: 16px; }
   .story-carousel__name { font-size: 12px; }
   .story-carousel__arrow { width: 40px; height: 40px; }
+}
+
+/* =========================================================
+   STORY詳細ページ：キャラクター情報テキスト
+   ========================================================= */
+.story-detail__info {
+  padding: 20px 24px 0;
+  text-align: center;
+  transition: opacity 0.18s ease;
+}
+.story-detail__info.is-fading { opacity: 0.2; }
+
+.story-detail__name {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--yellow);
+}
+
+.story-detail__meta {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-dim);
+  letter-spacing: 0.04em;
+}
+
+.story-detail__bio {
+  margin: 0 auto;
+  max-width: 420px;
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--ink);
+  text-align: left;
+}
+
+@media (min-width: 1024px) {
+  .story-detail__name { font-size: 26px; }
+  .story-detail__bio { font-size: 14.5px; }
 }
