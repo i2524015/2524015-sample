@@ -60,6 +60,42 @@ const TERMS = [
     label: '投票フェイズ',
     title: '投票フェイズ',
     desc: '議論で集めた情報をもとに、犯人だと思う人物へ投票するフェイズ。一票が結末を左右する。'
+  },
+  {
+    id: 'suspect',
+    label: '容疑者',
+    title: '容疑者',
+    desc: '事件に関与した疑いをかけられているキャラクター。プレイヤー全員が容疑者になり得る。'
+  },
+  {
+    id: 'motive',
+    label: '動機',
+    title: '動機',
+    desc: '犯人がその行動に至った理由。金銭、怨恨、保身など、キャラクターごとに設定されている。'
+  },
+  {
+    id: 'murder-weapon',
+    label: '凶器',
+    title: '凶器',
+    desc: '事件に使用された道具。発見場所や特徴から、犯人を絞り込む手がかりになる。'
+  },
+  {
+    id: 'timeline',
+    label: 'タイムライン',
+    title: 'タイムライン',
+    desc: '事件当日の出来事を時系列で整理した年表。矛盾を見つける議論の土台になる。'
+  },
+  {
+    id: 'majority-vote',
+    label: '多数決',
+    title: '多数決',
+    desc: '投票フェイズで最も票を集めた人物が犯人と見なされるルール。同票の場合の扱いはシナリオによって異なる。'
+  },
+  {
+    id: 'spoiler',
+    label: 'ネタバレ',
+    title: 'ネタバレ',
+    desc: '真相や結末に関わる情報。同じシナリオを未プレイの人がいる場では話さないのがマナー。'
   }
 ];
 
@@ -288,7 +324,8 @@ function setupWordDetailCarousel() {
 }
 
 /* ---------------------------------------------------------
-   index.html: STORY キャラクターセレクター（矢印でスクロール）
+   index.html: STORY キャラクターセレクター
+   矢印／サムネイルで選択すると、背景に大きくそのキャラが浮かび上がる
 --------------------------------------------------------- */
 function setupHomeStoryCarousel() {
   const track = document.getElementById('homeStoryTrack');
@@ -297,24 +334,51 @@ function setupHomeStoryCarousel() {
   const prevBtn = document.getElementById('homeStoryPrev');
   const nextBtn = document.getElementById('homeStoryNext');
   const thumbs = Array.from(track.children);
+  const backdrop = document.getElementById('storyBackdrop');
+  const moreLink = document.getElementById('storyMoreLink');
 
-  function scrollByThumb(dir) {
-    const thumbWidth = thumbs[0]?.getBoundingClientRect().width || 60;
-    const gap = 12;
-    track.scrollBy({ left: dir * (thumbWidth + gap) * 2, behavior: 'smooth' });
+  let activeIndex = Math.max(0, thumbs.findIndex(t => t.classList.contains('is-active')));
+
+  function applyActive(index, { scroll = true, silent = false } = {}) {
+    activeIndex = (index + thumbs.length) % thumbs.length;
+    const activeThumb = thumbs[activeIndex];
+
+    thumbs.forEach((t, i) => t.classList.toggle('is-active', i === activeIndex));
+
+    const charKey = activeThumb.dataset.char;
+    if (backdrop && charKey) {
+      if (silent) {
+        backdrop.className = 'story-carousel__backdrop';
+        backdrop.classList.add(`char-bg-${charKey}-large`);
+      } else {
+        backdrop.classList.add('is-fading');
+        setTimeout(() => {
+          // 前のキャラのクラスをすべて外してから、新しいキャラのクラスを付与
+          backdrop.className = 'story-carousel__backdrop';
+          backdrop.classList.add(`char-bg-${charKey}-large`);
+          requestAnimationFrame(() => backdrop.classList.remove('is-fading'));
+        }, 220);
+      }
+    }
+
+    if (moreLink) moreLink.setAttribute('href', `story.html?char=${activeIndex}`);
+
+    if (scroll) {
+      activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
   }
 
-  prevBtn?.addEventListener('click', () => scrollByThumb(-1));
-  nextBtn?.addEventListener('click', () => scrollByThumb(1));
+  prevBtn?.addEventListener('click', () => applyActive(activeIndex - 1));
+  nextBtn?.addEventListener('click', () => applyActive(activeIndex + 1));
 
-  thumbs.forEach(thumb => {
-    thumb.addEventListener('click', () => {
-      thumbs.forEach(t => t.classList.remove('is-active'));
-      thumb.classList.add('is-active');
-    });
+  thumbs.forEach((thumb, i) => {
+    thumb.addEventListener('click', () => applyActive(i, { scroll: false }));
   });
 
   makeDragScrollable(track);
+
+  // 初期状態（section-ctaのリンク先など）を反映（フェードなし）
+  applyActive(activeIndex, { scroll: false, silent: true });
 }
 
 /* ---------------------------------------------------------
@@ -415,6 +479,27 @@ const MM_TYPE_RESULT_KEY = 'mmTypeResult';
 /* ---------------------------------------------------------
    type.html: マダミスタイプ診断（簡易デモ）
 --------------------------------------------------------- */
+/* ---------------------------------------------------------
+   診断結果：主タイプ×副タイプの組み合わせで6種類の型を判定
+--------------------------------------------------------- */
+const TYPE_ORDER = ['推理型', '対話型', '直感型'];
+const TYPE_COMBOS = {
+  '推理型-対話型': '参謀型',
+  '推理型-直感型': '名探偵型',
+  '対話型-推理型': '交渉人型',
+  '対話型-直感型': 'ムードメーカー型',
+  '直感型-推理型': '策士型',
+  '直感型-対話型': '共感型'
+};
+
+function resolveQuizResult(scores) {
+  const entries = TYPE_ORDER.map(type => [type, scores[type] || 0]);
+  entries.sort((a, b) => b[1] - a[1] || TYPE_ORDER.indexOf(a[0]) - TYPE_ORDER.indexOf(b[0]));
+  const primary = entries[0][0];
+  const secondary = entries[1][0];
+  return TYPE_COMBOS[`${primary}-${secondary}`] || primary;
+}
+
 function setupTypeQuiz() {
   const btnStart = document.getElementById('btnStart');
   if (!btnStart) return;
@@ -457,7 +542,7 @@ function setupTypeQuiz() {
         if (qIndex < questions.length) {
           showQuestion(qIndex);
         } else {
-          const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+          const winner = resolveQuizResult(scores);
           quiz.classList.remove('is-visible');
           setTimeout(() => {
             quiz.classList.add('is-hidden');
