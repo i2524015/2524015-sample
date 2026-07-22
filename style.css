@@ -626,7 +626,7 @@ body.nav-compact .navbar__search svg {
   background:
     radial-gradient(circle at 35% 30%, #3a4a58, #16232f 70%);
   background-size: cover;
-  background-position: center;
+  background-position: center 16%;
   border: 3px solid var(--yellow);
 }
 
@@ -935,23 +935,40 @@ body.nav-compact .navbar__search svg {
   margin-top: 10px;
 }
 
-/* ---- phase04: 投票フェイズ（バッジ＋矢印図） ---- */
+/* ---- phase04: 投票フェイズ（キャラ画像バッジ＋矢印図） ---- */
 .voting-diagram {
+  position: relative;
   display: flex;
   justify-content: center;
   padding: 12px 0 4px;
 }
 
-.voting-diagram svg { width: 100%; max-width: 340px; height: auto; }
-
-.voting-badge {
-  fill: url(#votingGold);
-  stroke: #8a6a1f;
-  stroke-width: 2;
+.voting-diagram__arrows {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  display: block;
 }
 
-.voting-badge-icon {
-  fill: #1c2530;
+.voting-diagram__badges {
+  position: absolute;
+  inset: 12px 0 4px;
+  max-width: 340px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+.voting-badge-img {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center 16%;
+  border: 2px solid #8a6a1f;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  transform: translate(-50%, -50%);
 }
 
 .voting-arrow {
@@ -959,6 +976,10 @@ body.nav-compact .navbar__search svg {
   stroke-width: 1.5;
   fill: none;
   marker-end: url(#votingArrowhead);
+}
+
+@media (min-width: 1024px) {
+  .voting-badge-img { width: 66px; height: 66px; }
 }
 
 /* =========================================================
@@ -1078,12 +1099,12 @@ body.nav-compact .navbar__search svg {
 }
 
 .btn-restart {
-  padding: 12px 32px;
+  padding: 8px 20px;
   background: transparent;
   border: 1.5px solid var(--yellow);
   color: var(--yellow);
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
 }
 .btn-restart:hover { background: var(--yellow); color: var(--navy-950); }
@@ -1131,11 +1152,11 @@ body.nav-compact .navbar__search svg {
 
 .story-detail__image {
   width: 100%;
-  max-width: 340px;
-  aspect-ratio: 1 / 1.05;
+  max-width: 380px;
+  aspect-ratio: 3 / 4;
   background-color: #d9d9d9;
   background-size: cover;
-  background-position: center 4%;
+  background-position: center top;
   border-radius: var(--radius);
   transition: opacity 0.18s ease;
 }
@@ -1395,7 +1416,7 @@ body.nav-compact .navbar__search svg {
   .page-marker__sub { font-size: 13px; }
 
   .story-detail__stage { padding: 0 5vw; }
-  .story-detail__image { max-width: 480px; aspect-ratio: 16 / 10; }
+  .story-detail__image { max-width: 420px; aspect-ratio: 3 / 4; }
 
   .story-detail__tabs {
     max-width: 480px;
