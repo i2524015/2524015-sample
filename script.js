@@ -70,11 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSmoothAnchors();
   setupMoreTerms();
   setupCaseFileCarousel();
+  setupHomeStoryCarousel();
   setupWordDetailCarousel();
   setupStoryTabs();
   setupTypeQuiz();
   setupHomeTypeResult();
   setupNavOverlay();
+  setupStickyNav();
 
 });
 
@@ -111,6 +113,31 @@ function setupScrollReveal() {
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
   targets.forEach(el => io.observe(el));
+}
+
+/* ---------------------------------------------------------
+   共通：下にスクロールしたらナビを小さく追従表示
+--------------------------------------------------------- */
+function setupStickyNav() {
+  const navbar = document.querySelector('.navbar');
+  if (!navbar) return;
+
+  const THRESHOLD = 64;
+  let ticking = false;
+
+  function update() {
+    document.body.classList.toggle('nav-compact', window.scrollY > THRESHOLD);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  update();
 }
 
 /* ---------------------------------------------------------
@@ -261,10 +288,38 @@ function setupWordDetailCarousel() {
 }
 
 /* ---------------------------------------------------------
+   index.html: STORY キャラクターセレクター（矢印でスクロール）
+--------------------------------------------------------- */
+function setupHomeStoryCarousel() {
+  const track = document.getElementById('homeStoryTrack');
+  if (!track) return;
+
+  const prevBtn = document.getElementById('homeStoryPrev');
+  const nextBtn = document.getElementById('homeStoryNext');
+  const thumbs = Array.from(track.children);
+
+  function scrollByThumb(dir) {
+    const thumbWidth = thumbs[0]?.getBoundingClientRect().width || 60;
+    const gap = 12;
+    track.scrollBy({ left: dir * (thumbWidth + gap) * 2, behavior: 'smooth' });
+  }
+
+  prevBtn?.addEventListener('click', () => scrollByThumb(-1));
+  nextBtn?.addEventListener('click', () => scrollByThumb(1));
+
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      thumbs.forEach(t => t.classList.remove('is-active'));
+      thumb.classList.add('is-active');
+    });
+  });
+}
+
+/* ---------------------------------------------------------
    story.html: キャラタブ切り替え
 --------------------------------------------------------- */
 function setupStoryTabs() {
-  const tabs = document.querySelectorAll('.story-tab');
+  const tabs = Array.from(document.querySelectorAll('.story-tab'));
   const image = document.getElementById('storyImage');
   if (!tabs.length || !image) return;
 
@@ -277,19 +332,29 @@ function setupStoryTabs() {
     'linear-gradient(150deg,#4a4a2f,#1c2b38)'
   ];
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('is-active'));
-      tab.classList.add('is-active');
+  function selectTab(tab) {
+    tabs.forEach(t => t.classList.remove('is-active'));
+    tab.classList.add('is-active');
 
-      const i = Number(tab.dataset.index) || 0;
-      image.classList.add('is-fading');
-      setTimeout(() => {
-        image.style.background = palettes[i % palettes.length];
-        image.classList.remove('is-fading');
-      }, 180);
-    });
+    const i = Number(tab.dataset.index) || 0;
+    image.classList.add('is-fading');
+    setTimeout(() => {
+      image.style.background = palettes[i % palettes.length];
+      image.classList.remove('is-fading');
+    }, 180);
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => selectTab(tab));
   });
+
+  // HOMEのキャラクターセレクターから ?char=N で遷移してきた場合、該当タブを初期選択
+  const params = new URLSearchParams(location.search);
+  const requestedChar = params.get('char');
+  if (requestedChar !== null) {
+    const targetTab = tabs.find(t => t.dataset.index === requestedChar);
+    if (targetTab) selectTab(targetTab);
+  }
 }
 
 /* ---------------------------------------------------------
