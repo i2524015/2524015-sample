@@ -313,6 +313,54 @@ function setupHomeStoryCarousel() {
       thumb.classList.add('is-active');
     });
   });
+
+  makeDragScrollable(track);
+}
+
+/* ---------------------------------------------------------
+   共通：横スクロール要素をマウスドラッグでも操作できるようにする
+   （スクロールバーを隠しているため、PCではドラッグが唯一の操作手段になる）
+--------------------------------------------------------- */
+function makeDragScrollable(container) {
+  if (!container) return;
+
+  let isDown = false;
+  let startX = 0;
+  let startScroll = 0;
+  let moved = false;
+
+  container.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse') return; // タッチ／ペンは標準のスクロールに任せる
+    isDown = true;
+    moved = false;
+    startX = e.clientX;
+    startScroll = container.scrollLeft;
+    container.classList.add('is-dragging');
+  });
+
+  container.addEventListener('pointermove', (e) => {
+    if (!isDown) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) moved = true;
+    container.scrollLeft = startScroll - dx;
+  });
+
+  function endDrag() {
+    isDown = false;
+    container.classList.remove('is-dragging');
+  }
+  container.addEventListener('pointerup', endDrag);
+  container.addEventListener('pointerleave', endDrag);
+  container.addEventListener('pointercancel', endDrag);
+
+  // ドラッグ後にリンク／ボタンへ誤ってクリック判定されるのを防ぐ
+  container.addEventListener('click', (e) => {
+    if (moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      moved = false;
+    }
+  }, true);
 }
 
 /* ---------------------------------------------------------
@@ -321,26 +369,26 @@ function setupHomeStoryCarousel() {
 function setupStoryTabs() {
   const tabs = Array.from(document.querySelectorAll('.story-tab'));
   const image = document.getElementById('storyImage');
+  const nameEl = document.getElementById('storyName');
+  const metaEl = document.getElementById('storyMeta');
+  const bioEl = document.getElementById('storyBio');
+  const infoEl = document.getElementById('storyInfo');
   if (!tabs.length || !image) return;
-
-  const palettes = [
-    'linear-gradient(150deg,#3a4a58,#1c2b38)',
-    'linear-gradient(150deg,#4a3a2f,#1c2b38)',
-    'linear-gradient(150deg,#2f3a4a,#1c2b38)',
-    'linear-gradient(150deg,#4a2f3a,#1c2b38)',
-    'linear-gradient(150deg,#2f4a3f,#1c2b38)',
-    'linear-gradient(150deg,#4a4a2f,#1c2b38)'
-  ];
 
   function selectTab(tab) {
     tabs.forEach(t => t.classList.remove('is-active'));
     tab.classList.add('is-active');
 
-    const i = Number(tab.dataset.index) || 0;
+    const img = tab.dataset.image;
     image.classList.add('is-fading');
+    infoEl?.classList.add('is-fading');
     setTimeout(() => {
-      image.style.background = palettes[i % palettes.length];
+      if (img) image.style.backgroundImage = `url('${img}')`;
+      if (nameEl) nameEl.textContent = tab.dataset.name || '';
+      if (metaEl) metaEl.textContent = tab.dataset.meta || '';
+      if (bioEl) bioEl.textContent = tab.dataset.bio || '';
       image.classList.remove('is-fading');
+      infoEl?.classList.remove('is-fading');
     }, 180);
   }
 
@@ -355,6 +403,8 @@ function setupStoryTabs() {
     const targetTab = tabs.find(t => t.dataset.index === requestedChar);
     if (targetTab) selectTab(targetTab);
   }
+
+  makeDragScrollable(document.getElementById('storyTabs'));
 }
 
 /* ---------------------------------------------------------
