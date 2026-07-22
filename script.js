@@ -339,6 +339,16 @@ function setupHomeStoryCarousel() {
 
   let activeIndex = Math.max(0, thumbs.findIndex(t => t.classList.contains('is-active')));
 
+  // track だけをスクロールさせる（scrollIntoView は端末によってページ全体を
+  // スクロールしてしまう不具合があるため使わない）
+  function scrollThumbIntoView(el) {
+    const trackRect = track.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const elCenter = elRect.left + elRect.width / 2;
+    const trackCenter = trackRect.left + trackRect.width / 2;
+    track.scrollBy({ left: elCenter - trackCenter, behavior: 'smooth' });
+  }
+
   function applyActive(index, { scroll = true, silent = false } = {}) {
     activeIndex = (index + thumbs.length) % thumbs.length;
     const activeThumb = thumbs[activeIndex];
@@ -364,7 +374,7 @@ function setupHomeStoryCarousel() {
     if (moreLink) moreLink.setAttribute('href', `story.html?char=${activeIndex}`);
 
     if (scroll) {
-      activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      scrollThumbIntoView(activeThumb);
     }
   }
 
@@ -372,7 +382,7 @@ function setupHomeStoryCarousel() {
   nextBtn?.addEventListener('click', () => applyActive(activeIndex + 1));
 
   thumbs.forEach((thumb, i) => {
-    thumb.addEventListener('click', () => applyActive(i, { scroll: false }));
+    thumb.addEventListener('click', () => applyActive(i, { scroll: true }));
   });
 
   makeDragScrollable(track);
