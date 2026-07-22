@@ -133,6 +133,30 @@
       <span class="term-card__corner"></span>
       <span class="term-card__label">投票フェイズ</span>
     </a>
+    <a class="term-card is-hidden" href="words.html?term=suspect">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">容疑者</span>
+    </a>
+    <a class="term-card is-hidden" href="words.html?term=motive">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">動機</span>
+    </a>
+    <a class="term-card is-hidden" href="words.html?term=murder-weapon">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">凶器</span>
+    </a>
+    <a class="term-card is-hidden" href="words.html?term=timeline">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">タイムライン</span>
+    </a>
+    <a class="term-card is-hidden" href="words.html?term=majority-vote">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">多数決</span>
+    </a>
+    <a class="term-card is-hidden" href="words.html?term=spoiler">
+      <span class="term-card__corner"></span>
+      <span class="term-card__label">ネタバレ</span>
+    </a>
   </div>
 
   <button class="btn-more" id="btnMore">もっと見る</button>
@@ -152,48 +176,53 @@
     <span class="section-heading__number">03</span>
   </a>
 
-  <div class="story-carousel reveal">
-    <button class="story-carousel__arrow story-carousel__arrow--prev" id="homeStoryPrev" aria-label="前のキャラクター">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </button>
+  <div class="story-carousel-wrap reveal">
+    <div class="story-carousel__backdrop char-bg-karena-large" id="storyBackdrop"></div>
+    <div class="story-carousel__backdrop-overlay"></div>
 
-    <div class="story-carousel__track" id="homeStoryTrack">
-      <a class="story-carousel__thumb is-active" href="story.html?char=0">
-        <span class="story-carousel__face" style="background-image:url('images/karena.jpg')"></span>
-        <span class="story-carousel__name">カレナ</span>
-      </a>
-      <a class="story-carousel__thumb" href="story.html?char=1">
-        <span class="story-carousel__face" style="background-image:url('images/lucio.jpg')"></span>
-        <span class="story-carousel__name">ルシオ</span>
-      </a>
-      <a class="story-carousel__thumb" href="story.html?char=2">
-        <span class="story-carousel__face" style="background-image:url('images/elsa.jpg')"></span>
-        <span class="story-carousel__name">エルザ</span>
-      </a>
-      <a class="story-carousel__thumb" href="story.html?char=3">
-        <span class="story-carousel__face" style="background-image:url('images/iris.jpg')"></span>
-        <span class="story-carousel__name">イリス</span>
-      </a>
-      <a class="story-carousel__thumb" href="story.html?char=4">
-        <span class="story-carousel__face" style="background-image:url('images/valkyris.jpg')"></span>
-        <span class="story-carousel__name">ヴァルキリス</span>
-      </a>
-      <a class="story-carousel__thumb" href="story.html?char=5">
-        <span class="story-carousel__face" style="background-image:url('images/gaias.jpg')"></span>
-        <span class="story-carousel__name">ガイアス</span>
-      </a>
+    <div class="story-carousel">
+      <button class="story-carousel__arrow story-carousel__arrow--prev" id="homeStoryPrev" aria-label="前のキャラクター">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="story-carousel__track" id="homeStoryTrack">
+        <button class="story-carousel__thumb is-active" data-index="0" data-char="karena">
+          <span class="story-carousel__face char-bg-karena-icon"></span>
+          <span class="story-carousel__name">カレナ</span>
+        </button>
+        <button class="story-carousel__thumb" data-index="1" data-char="lucio">
+          <span class="story-carousel__face char-bg-lucio-icon"></span>
+          <span class="story-carousel__name">ルシオ</span>
+        </button>
+        <button class="story-carousel__thumb" data-index="2" data-char="elsa">
+          <span class="story-carousel__face char-bg-elsa-icon"></span>
+          <span class="story-carousel__name">エルザ</span>
+        </button>
+        <button class="story-carousel__thumb" data-index="3" data-char="iris">
+          <span class="story-carousel__face char-bg-iris-icon"></span>
+          <span class="story-carousel__name">イリス</span>
+        </button>
+        <button class="story-carousel__thumb" data-index="4" data-char="valkyris">
+          <span class="story-carousel__face char-bg-valkyris-icon"></span>
+          <span class="story-carousel__name">ヴァルキリス</span>
+        </button>
+        <button class="story-carousel__thumb" data-index="5" data-char="gaias">
+          <span class="story-carousel__face char-bg-gaias-icon"></span>
+          <span class="story-carousel__name">ガイアス</span>
+        </button>
+      </div>
+
+      <button class="story-carousel__arrow story-carousel__arrow--next" id="homeStoryNext" aria-label="次のキャラクター">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
     </div>
-
-    <button class="story-carousel__arrow story-carousel__arrow--next" id="homeStoryNext" aria-label="次のキャラクター">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </button>
   </div>
 
-  <a class="section-cta section-cta--story reveal" href="story.html">
+  <a class="section-cta section-cta--story reveal" href="story.html?char=0" id="storyMoreLink">
     <span class="section-cta__number">03</span>
     <span class="section-cta__label">STORY</span>
     <span class="section-cta__sublabel">キャラクターの物語をもっと見る</span>
@@ -216,27 +245,27 @@
   <div class="type-grid reveal">
     <div class="type-card">
       <span class="type-card__badge"></span>
-      <span class="type-card__label">推理型</span>
+      <span class="type-card__label">名探偵型</span>
     </div>
     <div class="type-card">
       <span class="type-card__badge"></span>
-      <span class="type-card__label">推理型</span>
+      <span class="type-card__label">参謀型</span>
     </div>
     <div class="type-card">
       <span class="type-card__badge"></span>
-      <span class="type-card__label">推理型</span>
+      <span class="type-card__label">策士型</span>
     </div>
     <div class="type-card">
       <span class="type-card__badge"></span>
-      <span class="type-card__label">推理型</span>
+      <span class="type-card__label">共感型</span>
     </div>
     <div class="type-card">
       <span class="type-card__badge"></span>
-      <span class="type-card__label">推理型</span>
+      <span class="type-card__label">交渉人型</span>
     </div>
     <div class="type-card">
       <span class="type-card__badge"></span>
-      <span class="type-card__label">推理型</span>
+      <span class="type-card__label">ムードメーカー型</span>
     </div>
   </div>
 
