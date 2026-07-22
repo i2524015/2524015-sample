@@ -355,7 +355,8 @@ button { font-family: inherit; cursor: pointer; }
 .term-card:hover,
 .term-card:focus-visible {
   border-color: var(--yellow);
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.3);
   outline: none;
 }
 
@@ -465,6 +466,16 @@ button { font-family: inherit; cursor: pointer; }
   justify-content: flex-end;
   padding-bottom: 16px;
   overflow: visible;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.type-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+.type-card:hover .type-card__badge {
+  transform: scale(1.08) rotate(-4deg);
 }
 
 .type-card__badge {
@@ -475,6 +486,7 @@ button { font-family: inherit; cursor: pointer; }
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ffe27a, var(--yellow) 65%);
   box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease;
 }
 
 .type-card__label {
@@ -735,20 +747,17 @@ button { font-family: inherit; cursor: pointer; }
   background:
     radial-gradient(circle at 50% 42%, #2a3441 0 34%, transparent 35%),
     conic-gradient(from 200deg, #f7e08a, #c99a2e 25%, #f7e08a 50%, #c99a2e 75%, #f7e08a 100%);
+  background-size: cover;
+  background-position: center;
   border: 2px solid #8a6a1f;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
-
-.character-card__portrait svg {
-  width: 52%;
-  height: 52%;
-  fill: #1c2530;
-  position: relative;
-  z-index: 1;
-}
+/* ↑ ここに実際のキャラクター画像を使う場合は、
+   inline style や別クラスで background-image: url("...") を指定してください。
+   例: <div class="character-card__portrait" style="background-image:url('images/claire.jpg')"></div> */
 
 .character-card__plate {
   width: 100%;
@@ -1065,24 +1074,65 @@ button { font-family: inherit; cursor: pointer; }
 
 .story-detail__tabs {
   display: flex;
-  gap: 8px;
-  padding: 24px 20px 0;
+  gap: 14px;
+  padding: 28px 20px 4px;
   overflow-x: auto;
+  scrollbar-width: none;
 }
+.story-detail__tabs::-webkit-scrollbar { display: none; }
 
 .story-tab {
-  flex: 1 0 56px;
-  height: 44px;
-  background: #d9d9d9;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 68px;
+  background: none;
   border: none;
-  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
-  opacity: 0.55;
-  transition: opacity 0.2s ease, background 0.2s ease;
+  padding: 0;
+  opacity: 0.6;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.story-tab__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 42%, #2a3441 0 34%, transparent 35%),
+    conic-gradient(from 200deg, #f7e08a, #c99a2e 25%, #f7e08a 50%, #c99a2e 75%, #f7e08a 100%);
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #8a6a1f;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.story-tab__name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.story-tab:hover,
+.story-tab:focus-visible {
+  opacity: 0.85;
+  outline: none;
 }
 
 .story-tab.is-active {
   opacity: 1;
-  background: var(--yellow);
+}
+
+.story-tab.is-active .story-tab__avatar {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(244,196,48,0.28), 0 6px 16px rgba(0,0,0,0.35);
+  transform: scale(1.08);
+}
+
+.story-tab.is-active .story-tab__name {
+  color: var(--yellow);
 }
 
 /* =========================================================
@@ -1282,9 +1332,12 @@ button { font-family: inherit; cursor: pointer; }
   .story-detail__tabs {
     max-width: 480px;
     margin: 0 auto;
-    padding: 28px 5vw 0;
+    padding: 32px 5vw 4px;
+    gap: 18px;
   }
-  .story-tab { height: 52px; }
+  .story-tab { width: 76px; }
+  .story-tab__avatar { width: 66px; height: 66px; }
+  .story-tab__name { font-size: 12px; }
 
   /* ---- WORDS 詳細ページ ---- */
   .word-detail { padding: 56px 0 72px; }
@@ -1392,6 +1445,7 @@ body.menu-open {
    共通：GAME風の凝ったセクションCTA（WORDS / STORY 末尾）
    ========================================================= */
 .section-cta {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -1403,6 +1457,23 @@ body.menu-open {
   color: var(--navy-950);
   clip-path: polygon(7% 0, 100% 0, 100% 100%, 0 100%);
   transition: transform 0.2s ease, filter 0.2s ease;
+  overflow: hidden;
+}
+
+.section-cta::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  left: -6%;
+  width: 46%;
+  height: 160%;
+  background-image: radial-gradient(rgba(15,25,34,0.16) 1.4px, transparent 1.4px);
+  background-size: 7px 7px;
+  pointer-events: none;
+}
+
+.section-cta > * {
+  position: relative;
 }
 
 .section-cta:hover,
@@ -1532,4 +1603,36 @@ body.menu-open {
 @media (min-width: 1024px) {
   .type-result-badge { margin: 4px 5vw 28px; padding: 20px 24px; }
   .type-result-badge__label { font-size: 26px; }
+}
+
+/* =========================================================
+   TYPE診断：進捗ゲージ
+   ========================================================= */
+.quiz-progress-wrap {
+  margin-bottom: 28px;
+}
+
+.quiz-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--navy-700);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(244,196,48,0.25);
+}
+
+.quiz-progress-bar__fill {
+  height: 100%;
+  width: 10%;
+  background: linear-gradient(90deg, var(--yellow-dim), var(--yellow));
+  border-radius: 999px;
+  transition: width 0.35s cubic-bezier(.3,.8,.4,1);
+}
+
+.quiz-progress {
+  margin: 8px 0 0;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-dim);
 }
