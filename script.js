@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupWordDetailCarousel();
   setupStoryTabs();
   setupTypeQuiz();
+  setupHomeTypeResult();
   setupNavOverlay();
 
 });
@@ -272,7 +273,8 @@ function setupStoryTabs() {
     'linear-gradient(150deg,#4a3a2f,#1c2b38)',
     'linear-gradient(150deg,#2f3a4a,#1c2b38)',
     'linear-gradient(150deg,#4a2f3a,#1c2b38)',
-    'linear-gradient(150deg,#2f4a3f,#1c2b38)'
+    'linear-gradient(150deg,#2f4a3f,#1c2b38)',
+    'linear-gradient(150deg,#4a4a2f,#1c2b38)'
   ];
 
   tabs.forEach(tab => {
@@ -291,6 +293,11 @@ function setupStoryTabs() {
 }
 
 /* ---------------------------------------------------------
+   共通：診断結果の保存キー
+--------------------------------------------------------- */
+const MM_TYPE_RESULT_KEY = 'mmTypeResult';
+
+/* ---------------------------------------------------------
    type.html: マダミスタイプ診断（簡易デモ）
 --------------------------------------------------------- */
 function setupTypeQuiz() {
@@ -303,12 +310,14 @@ function setupTypeQuiz() {
   const questions = Array.from(document.querySelectorAll('.quiz-question'));
   const resultLabel = document.getElementById('resultLabel');
   const btnRestart = document.getElementById('btnRestart');
+  const progress = document.getElementById('quizProgress');
 
   let qIndex = 0;
   const scores = {};
 
   function showQuestion(i) {
     questions.forEach((q, idx) => q.classList.toggle('is-active', idx === i));
+    if (progress) progress.textContent = `${i + 1} / ${questions.length}問`;
   }
 
   btnStart.addEventListener('click', () => {
@@ -339,6 +348,12 @@ function setupTypeQuiz() {
             resultLabel.textContent = winner;
             requestAnimationFrame(() => result.classList.add('is-visible'));
           }, 250);
+
+          try {
+            localStorage.setItem(MM_TYPE_RESULT_KEY, winner);
+          } catch (e) {
+            /* localStorage が使えない環境では静かに無視 */
+          }
         }
       });
     });
@@ -354,4 +369,27 @@ function setupTypeQuiz() {
       quiz.classList.add('is-hidden');
     }, 250);
   });
+}
+
+/* ---------------------------------------------------------
+   index.html: 診断結果バッジ（type.html で保存した結果を表示）
+--------------------------------------------------------- */
+function setupHomeTypeResult() {
+  const badge = document.getElementById('typeResultBadge');
+  const label = document.getElementById('typeResultLabel');
+  const ctaLabel = document.getElementById('btnDiagnosisLabel');
+  if (!badge || !label) return;
+
+  let saved = null;
+  try {
+    saved = localStorage.getItem(MM_TYPE_RESULT_KEY);
+  } catch (e) {
+    saved = null;
+  }
+
+  if (saved) {
+    label.textContent = saved;
+    badge.classList.remove('is-hidden');
+    if (ctaLabel) ctaLabel.textContent = 'もう一度診断する';
+  }
 }
