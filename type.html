@@ -55,6 +55,13 @@
     <!-- 簡易診断クイズ -->
     <div class="quiz-body is-hidden" id="quizBody">
 
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-bar__fill" id="quizProgressFill"></div>
+        </div>
+        <p class="quiz-progress" id="quizProgress">1 / 10問</p>
+      </div>
+
       <div class="quiz-question is-active" data-index="0">
         <p class="quiz-question__text">事件現場に着いたら、まず何をする？</p>
         <div class="quiz-options">
@@ -145,7 +152,6 @@
         </div>
       </div>
 
-      <p class="quiz-progress" id="quizProgress">1 / 10問</p>
     </div>
 
     <!-- 診断結果 -->
