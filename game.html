@@ -136,13 +136,8 @@
       議論で集めた情報をもとに、犯人だと思う人物へ投票します。一票が物語の結末を大きく左右します。
     </p>
     <div class="voting-diagram">
-      <svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
+      <svg class="voting-diagram__arrows" viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="votingGold" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#f7e08a"/>
-            <stop offset="0.5" stop-color="#c99a2e"/>
-            <stop offset="1" stop-color="#f7e08a"/>
-          </linearGradient>
           <marker id="votingArrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
             <path d="M0,0 L8,4 L0,8 Z" fill="#b9c3ca"/>
           </marker>
@@ -155,35 +150,16 @@
         <line class="voting-arrow" x1="106" y1="187" x2="248" y2="80" marker-end="url(#votingArrowhead)"/>
         <line class="voting-arrow" x1="151" y1="180" x2="84" y2="88" marker-end="url(#votingArrowhead)"/>
         <line class="voting-arrow" x1="244" y1="179" x2="191" y2="90" marker-end="url(#votingArrowhead)"/>
-
-        <!-- top row -->
-        <g>
-          <circle class="voting-badge" cx="60" cy="56" r="30"/>
-          <path class="voting-badge-icon" transform="translate(46,42) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
-        </g>
-        <g>
-          <circle class="voting-badge" cx="170" cy="56" r="30"/>
-          <path class="voting-badge-icon" transform="translate(156,42) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
-        </g>
-        <g>
-          <circle class="voting-badge" cx="280" cy="56" r="30"/>
-          <path class="voting-badge-icon" transform="translate(266,42) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
-        </g>
-
-        <!-- bottom row -->
-        <g>
-          <circle class="voting-badge" cx="80" cy="206" r="30"/>
-          <path class="voting-badge-icon" transform="translate(66,192) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
-        </g>
-        <g>
-          <circle class="voting-badge" cx="170" cy="206" r="30"/>
-          <path class="voting-badge-icon" transform="translate(156,192) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
-        </g>
-        <g>
-          <circle class="voting-badge" cx="260" cy="206" r="30"/>
-          <path class="voting-badge-icon" transform="translate(246,192) scale(0.9)" d="M12 2a5 5 0 015 5c0 2.4-1.6 4.4-3.8 4.9 3.6.7 6.3 3.4 6.8 6.9.1.7-.4 1.2-1.1 1.2H7.1c-.7 0-1.2-.5-1.1-1.2.5-3.5 3.2-6.2 6.8-6.9C10.6 11.4 9 9.4 9 7a5 5 0 013-4.6z"/>
-        </g>
       </svg>
+
+      <div class="voting-diagram__badges">
+        <span class="voting-badge-img char-bg-karena-icon" style="left:17.65%; top:21.54%;" aria-label="カレナ"></span>
+        <span class="voting-badge-img char-bg-lucio-icon" style="left:50%; top:21.54%;" aria-label="ルシオ"></span>
+        <span class="voting-badge-img char-bg-elsa-icon" style="left:82.35%; top:21.54%;" aria-label="エルザ"></span>
+        <span class="voting-badge-img char-bg-iris-icon" style="left:23.53%; top:79.23%;" aria-label="イリス"></span>
+        <span class="voting-badge-img char-bg-valkyris-icon" style="left:50%; top:79.23%;" aria-label="ヴァルキリス"></span>
+        <span class="voting-badge-img char-bg-gaias-icon" style="left:76.47%; top:79.23%;" aria-label="ガイアス"></span>
+      </div>
     </div>
   </section>
 
