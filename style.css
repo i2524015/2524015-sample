@@ -483,25 +483,6 @@ body.nav-compact .navbar__search svg {
   padding-bottom: 48px;
 }
 
-.story__panel {
-  display: block;
-  margin: 24px;
-  height: 90px;
-  border-radius: var(--radius);
-  background:
-    linear-gradient(100deg, rgba(244,196,48,0.10) 0%, transparent 40%),
-    var(--navy-800);
-  border: 1px solid rgba(244,196,48,0.2);
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.story__panel:hover,
-.story__panel:focus-visible {
-  border-color: var(--yellow);
-  transform: translateY(-2px);
-  outline: none;
-}
-
 /* ---------------------------------------------------------
    TYPE SECTION
 --------------------------------------------------------- */
@@ -839,13 +820,6 @@ body.nav-compact .navbar__search svg {
   margin-bottom: 3px;
 }
 
-.character-card__desc {
-  margin: 0;
-  font-size: 10px;
-  line-height: 1.5;
-  color: var(--ink-dim);
-}
-
 /* ---- phase02: 情報整理（吹き出し） ---- */
 .quote-row {
   display: flex;
@@ -1098,12 +1072,6 @@ body.nav-compact .navbar__search svg {
   border-color: var(--yellow);
   background: var(--navy-700);
   transform: translateY(-1px);
-}
-
-.quiz-progress {
-  margin-top: 20px;
-  font-size: 12px;
-  color: var(--ink-dim);
 }
 
 .quiz-result {
@@ -1415,7 +1383,6 @@ body.nav-compact .navbar__search svg {
   }
 
   .character-card__name { font-size: 13px; }
-  .character-card__desc { font-size: 10.5px; }
 
   .quote-row { gap: 20px; }
   .avatar-circle { width: 84px; height: 84px; }
@@ -1627,68 +1594,10 @@ body.menu-open {
   margin-top: 2px;
 }
 
-/* =========================================================
-   STORYセクション：キャラクタープレビュー（HOME）
-   ========================================================= */
-.story-preview {
-  display: flex;
-  gap: 16px;
-  padding: 22px 24px 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.story-preview::-webkit-scrollbar { display: none; }
-
-.story-preview__card {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  width: 72px;
-  transition: transform 0.2s ease;
-}
-
-.story-preview__card:hover,
-.story-preview__card:focus-visible {
-  transform: translateY(-3px);
-  outline: none;
-}
-
-.story-preview__portrait {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 42%, #2a3441 0 34%, transparent 35%),
-    conic-gradient(from 200deg, #f7e08a, #c99a2e 25%, #f7e08a 50%, #c99a2e 75%, #f7e08a 100%);
-  border: 2px solid #8a6a1f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.story-preview__portrait svg {
-  width: 50%;
-  height: 50%;
-  fill: #1c2530;
-}
-
-.story-preview__name {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--ink);
-  white-space: nowrap;
-}
-
 @media (min-width: 1024px) {
   .section-cta { margin: 26px 5vw 0 auto; padding: 11px 18px 12px; }
   .section-cta__number { font-size: 22px; }
   .section-cta__label { font-size: 14px; }
-  .story-preview { padding: 26px 5vw 4px; gap: 22px; }
-  .story-preview__card { width: 84px; }
-  .story-preview__portrait { width: 76px; height: 76px; }
-  .story-preview__name { font-size: 12.5px; }
 }
 
 /* =========================================================
@@ -1894,44 +1803,6 @@ body.menu-open {
 }
 
 /* =========================================================
-   STORY詳細ページ：キャラクター情報テキスト
-   ========================================================= */
-.story-detail__info {
-  padding: 20px 24px 0;
-  text-align: center;
-  transition: opacity 0.18s ease;
-}
-.story-detail__info.is-fading { opacity: 0.2; }
-
-.story-detail__name {
-  margin: 0 0 6px;
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--yellow);
-}
-
-.story-detail__meta {
-  margin: 0 0 12px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink-dim);
-  letter-spacing: 0.04em;
-}
-
-.story-detail__bio {
-  margin: 0 auto;
-  max-width: 420px;
-  font-size: 13.5px;
-  line-height: 1.9;
-  color: var(--ink);
-  text-align: left;
-}
-
-@media (min-width: 1024px) {
-  .story-detail__name { font-size: 26px; }
-  .story-detail__bio { font-size: 14.5px; }
-}
-/* =========================================================
    キャラクター画像（base64埋め込み）
    フォルダ構成に依存せず、CSS単体で画像を確実に表示するため
    ここに直接埋め込んでいます。
@@ -1952,7 +1823,6 @@ body.menu-open {
 /* =========================================================
    CASE FILE：容疑者シルエットアイコン（base64埋め込み）
    ========================================================= */
-.char-bg-suspect-silhouette { background-image: url('data:image/jpeg;base64,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'); }
 
 /* =========================================================
    HOME：ヒーロー背景（捜査ボード写真・base64埋め込み）
